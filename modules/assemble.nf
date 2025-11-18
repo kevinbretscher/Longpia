@@ -1,16 +1,20 @@
-// modules/assemble.nf - placeholder module
-process assembleReads {
-    tag "assemble"
+process ASSEMBLE {
+    tag "${assembler}_${sample}"
 
     input:
-    path reads
+    tuple val(assembler), val(sample)
+    path subsampled
+    val genome_size
 
     output:
-    path "assembly.fasta"
+    path "assemblies"
 
-    script:
     """
-    # placeholder: assemble reads
-    echo ">contig_1\nATGC" > assembly.fasta
+    mkdir -p assemblies
+    autocycler helper $assembler \
+        --reads subsampled_reads/sample_${sample}.fastq \
+        --out_prefix assemblies/${assembler}_${sample} \
+        --threads ${params.threads} \
+        --genome_size $genome_size
     """
 }

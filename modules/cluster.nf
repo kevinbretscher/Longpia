@@ -1,16 +1,13 @@
-// modules/cluster.nf - placeholder module
-process clusterContigs {
+process CLUSTER {
     tag "cluster"
 
     input:
-    path assembly
+    path outdir
 
     output:
-    path "clusters.txt"
+    path outdir
 
-    script:
     """
-    # placeholder: cluster contigs
-    echo "cluster_1 contig_1" > clusters.txt
+    autocycler cluster -a ${params.outdir}
     """
 }

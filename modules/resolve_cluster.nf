@@ -1,16 +1,14 @@
-// modules/resolve_cluster.nf - placeholder module
-process resolveCluster {
-    tag "resolve_cluster"
+process RESOLVE_CLUSTERS {
+    tag { cluster }
 
     input:
-    path clusters
+    path cluster
 
     output:
-    path "resolved.fasta"
+    path cluster
 
-    script:
     """
-    # placeholder: resolve clusters
-    echo ">resolved_1\nATGC" > resolved.fasta
+    autocycler trim -c $cluster
+    autocycler resolve -c $cluster
     """
 }

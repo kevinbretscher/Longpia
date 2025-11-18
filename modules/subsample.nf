@@ -1,16 +1,17 @@
-// modules/subsample.nf - placeholder module
-process subsampleReads {
+process SUBSAMPLE {
     tag "subsample"
 
     input:
     path reads
+    val genome_size
 
     output:
-    path "subsampled.fastq"
+    path "subsampled_reads"
 
-    script:
     """
-    # placeholder: subsample reads
-    cp $reads subsampled.fastq
+    autocycler subsample \
+        --reads $reads \
+        --out_dir subsampled_reads \
+        --genome_size $genome_size
     """
 }

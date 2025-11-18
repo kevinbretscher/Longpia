@@ -1,15 +1,15 @@
-// modules/compress.nf - placeholder module
-process compressOutputs {
+process COMPRESS {
     tag "compress"
 
     input:
-    path file_to_compress
+    path assemblies
 
     output:
-    path "${file_to_compress}.gz"
+    path "${params.outdir}"
 
-    script:
     """
-    gzip -c $file_to_compress > ${file_to_compress}.gz
+    autocycler compress \
+        -i assemblies \
+        -a ${params.outdir}
     """
 }

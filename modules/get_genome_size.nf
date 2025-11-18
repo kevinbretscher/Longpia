@@ -1,16 +1,19 @@
-// modules/get_genome_size.nf - placeholder module
-process getGenomeSize {
-    tag "get_genome_size"
+process GET_GENOME_SIZE {
+    tag "genome_size"
+    publishDir "${params.outdir}", mode: 'copy'
 
     input:
-    path fasta
+    path reads
 
     output:
-    stdout result
+    val genome_size
 
-    script:
     """
-    # placeholder: compute genome size
-    echo "genome_size=1000"
+    genome_size=\$(autocycler helper genome_size \
+        --reads $reads \
+        --threads ${params.threads})
+
+    echo \$genome_size > genome_size.txt
     """
+    genome_size = file("genome_size.txt").text.trim()
 }

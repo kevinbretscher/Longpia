@@ -1,16 +1,16 @@
-// modules/combine.nf - placeholder module
-process combineResults {
+process COMBINE {
     tag "combine"
 
     input:
-    path results
+    path outdir
+    path resolved
 
     output:
-    path "combined.txt"
+    path "${params.outdir}/final_assembly.gfa"
 
-    script:
     """
-    # placeholder: combine results
-    echo "combined" > combined.txt
+    autocycler combine \
+        -a ${params.outdir} \
+        -i ${params.outdir}/clustering/qc_pass/cluster_*/5_final.gfa
     """
 }
