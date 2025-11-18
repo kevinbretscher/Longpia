@@ -7,6 +7,7 @@ process CLUSTER {
     output:
     path outdir
 
+    script:
     """
     autocycler cluster -a ${params.outdir}
     """

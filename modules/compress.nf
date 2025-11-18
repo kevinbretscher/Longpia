@@ -7,6 +7,7 @@ process COMPRESS {
     output:
     path "${params.outdir}"
 
+    script:
     """
     autocycler compress \
         -i assemblies \

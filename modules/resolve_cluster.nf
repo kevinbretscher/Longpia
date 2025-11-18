@@ -1,5 +1,5 @@
 process RESOLVE_CLUSTERS {
-    tag { cluster }
+    tag "${cluster}"
 
     input:
     path cluster
@@ -7,6 +7,7 @@ process RESOLVE_CLUSTERS {
     output:
     path cluster
 
+    script:
     """
     autocycler trim -c $cluster
     autocycler resolve -c $cluster

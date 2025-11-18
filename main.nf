@@ -10,7 +10,7 @@ include { COMBINE }          from './modules/combine.nf'
 
 workflow {
 
-    reads_ch = Channel.fromPath(params.reads)
+    reads_ch = channel.fromPath(params.reads)
 
     genome_size_ch = GET_GENOME_SIZE(reads_ch)
 
@@ -22,9 +22,9 @@ workflow {
     ]
     samples = ["01","02","03","04"]
 
-    assembly_jobs = Channel
+    assembly_jobs = channel
         .from(assemblers)
-        .combine(Channel.from(samples))
+        .combine(channel.from(samples))
         .map { assembler, sample -> tuple(assembler,sample) }
 
     assembly_out = ASSEMBLE(assembly_jobs, subsampled_ch, genome_size_ch)
@@ -33,7 +33,7 @@ workflow {
 
     clustered = CLUSTER(compressed)
 
-    cluster_dirs = Channel
+    cluster_dirs = channel
         .fromPath("${params.outdir}/clustering/qc_pass/cluster_*")
 
     resolved_clusters = RESOLVE_CLUSTERS(cluster_dirs)

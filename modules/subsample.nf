@@ -8,6 +8,7 @@ process SUBSAMPLE {
     output:
     path "subsampled_reads"
 
+    script:
     """
     autocycler subsample \
         --reads $reads \

@@ -8,6 +8,7 @@ process COMBINE {
     output:
     path "${params.outdir}/final_assembly.gfa"
 
+    script:
     """
     autocycler combine \
         -a ${params.outdir} \

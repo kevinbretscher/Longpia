@@ -9,6 +9,7 @@ process ASSEMBLE {
     output:
     path "assemblies"
 
+    script:
     """
     mkdir -p assemblies
     autocycler helper $assembler \
