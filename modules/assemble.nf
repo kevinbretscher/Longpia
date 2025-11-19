@@ -15,7 +15,7 @@ process ASSEMBLE {
     autocycler helper $assembler \
         --reads subsampled_reads/sample_${sample}.fastq \
         --out_prefix assemblies/${assembler}_${sample} \
-        --threads ${params.threads} \
+        --threads $task.cpus \
         --genome_size $genome_size
     """
 }

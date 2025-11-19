@@ -7,12 +7,12 @@ process GET_GENOME_SIZE {
 
     output:
     val genome_size
-    
+
     script:
     """
     genome_size=\$(autocycler helper genome_size \
         --reads $reads \
-        --threads ${params.threads})
+        --threads $task.cpus)
 
     echo \$genome_size > genome_size.txt
     """
