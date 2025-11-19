@@ -12,5 +12,6 @@ process COMPRESS {
     autocycler compress \
         -i assemblies \
         -a ${params.outdir}
+        -t $task.cpus
     """
 }

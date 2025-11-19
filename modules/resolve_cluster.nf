@@ -9,7 +9,7 @@ process RESOLVE_CLUSTERS {
 
     script:
     """
-    autocycler trim -c $cluster
+    autocycler trim -c $cluster -t $task.cpus
     autocycler resolve -c $cluster
     """
 }
