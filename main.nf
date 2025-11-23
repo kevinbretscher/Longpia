@@ -11,8 +11,9 @@ include { COMBINE }          from './modules/combine.nf'
 workflow {
 
     reads_ch = channel.fromPath(params.reads)
+    reads_ch.view { it -> println "reads_ch item: $it" }
 
-    genome_size_ch = GET_GENOME_SIZE(reads_ch)
+    genome_size_ch = GET_GENOME_SIZE(reads_ch).map { f -> f.text.trim() }
 
     subsampled_ch = SUBSAMPLE(reads_ch, genome_size_ch)
 
@@ -33,8 +34,7 @@ workflow {
 
     clustered = CLUSTER(compressed)
 
-    cluster_dirs = channel
-        .fromPath("${params.outdir}/clustering/qc_pass/cluster_*")
+    cluster_dirs = channel.fromPath("${params.outdir}/clustering/qc_pass/cluster_*")
 
     resolved_clusters = RESOLVE_CLUSTERS(cluster_dirs)
 

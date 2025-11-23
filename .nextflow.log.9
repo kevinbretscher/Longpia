@@ -1,0 +1,285 @@
+Nov-22 21:29:45.421 [main] DEBUG nextflow.cli.Launcher - $> nextflow run main.nf -profile local
+Nov-22 21:29:45.516 [main] DEBUG nextflow.cli.CmdRun - N E X T F L O W  ~  version 25.10.0
+Nov-22 21:29:45.546 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /home/kevin/Nextflow_autocycler/nextflow.config
+Nov-22 21:29:45.551 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/kevin/Nextflow_autocycler/nextflow.config
+Nov-22 21:29:45.581 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `local`
+Nov-22 21:29:46.051 [main] DEBUG nextflow.config.ConfigBuilder - Available config profiles: [slurm, local]
+Nov-22 21:29:46.078 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/kevin/.nextflow/plugins; core-plugins: nf-amazon@3.4.1,nf-azure@1.20.2,nf-cloudcache@0.5.0,nf-codecommit@0.5.0,nf-console@1.3.0,nf-google@1.23.3,nf-k8s@1.2.2,nf-tower@1.17.1,nf-wave@1.16.1
+Nov-22 21:29:46.087 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Nov-22 21:29:46.088 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Nov-22 21:29:46.091 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.12.0 in 'deployment' mode
+Nov-22 21:29:46.102 [main] DEBUG nextflow.util.RetryConfig - Missing nextflow session - using default retry config
+Nov-22 21:29:46.208 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Nov-22 21:29:46.209 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Nov-22 21:29:46.209 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Nov-22 21:29:46.220 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/kevin/.nextflow/secrets/store.json
+Nov-22 21:29:46.223 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@655f69da] - activable => nextflow.secret.LocalSecretsProvider@655f69da
+Nov-22 21:29:46.230 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declaration
+Nov-22 21:29:46.239 [main] DEBUG nextflow.cli.CmdRun - Launching `main.nf` [magical_kalam] DSL2 - revision: 657befa812
+Nov-22 21:29:46.281 [main] DEBUG nextflow.Session - Session UUID: 7099036c-8f1f-4413-afb5-82a9ed18d7a3
+Nov-22 21:29:46.282 [main] DEBUG nextflow.Session - Run name: magical_kalam
+Nov-22 21:29:46.283 [main] DEBUG nextflow.Session - Executor pool size: 16
+Nov-22 21:29:46.292 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Nov-22 21:29:46.297 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=48; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Nov-22 21:29:46.315 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 25.10.0 build 10289
+  Created: 22-10-2025 16:26 UTC (18:26 CEST)
+  System: Linux 6.8.0-87-generic
+  Runtime: Groovy 4.0.28 on OpenJDK 64-Bit Server VM 23.0.2-internal-adhoc.conda.src
+  Encoding: UTF-8 (UTF-8)
+  Process: 16833@kevin-HP-ProBook-450 [127.0.1.1]
+  CPUs: 16 - Mem: 15.3 GB (5.9 GB) - Swap: 2.2 GB (2.2 GB)
+Nov-22 21:29:46.332 [main] DEBUG nextflow.Session - Work-dir: /home/kevin/Nextflow_autocycler/work [ext2/ext3]
+Nov-22 21:29:46.332 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /home/kevin/Nextflow_autocycler/bin
+Nov-22 21:29:46.341 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Nov-22 21:29:46.350 [main] DEBUG nextflow.Session - Observer factory (v2): LinObserverFactory
+Nov-22 21:29:46.353 [main] DEBUG nextflow.Session - Observer factory (v2): DefaultObserverFactory
+Nov-22 21:29:46.389 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Nov-22 21:29:46.396 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 17; maxThreads: 1000
+Nov-22 21:29:46.453 [main] DEBUG nextflow.Session - Session start
+Nov-22 21:29:46.651 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Nov-22 21:29:47.061 [main] DEBUG n.script.dsl.ProcessConfigBuilder - Config settings `withName:GET_GENOME_SIZE` matches process GET_GENOME_SIZE
+Nov-22 21:29:47.067 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Nov-22 21:29:47.068 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Nov-22 21:29:47.076 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Nov-22 21:29:47.082 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=16; memory=15.3 GB; capacity=16; pollInterval=100ms; dumpInterval=5m
+Nov-22 21:29:47.084 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+Nov-22 21:29:47.102 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'GET_GENOME_SIZE': maxForks=0; fair=false; array=0
+Nov-22 21:29:47.138 [main] DEBUG n.script.dsl.ProcessConfigBuilder - Config settings `withName:SUBSAMPLE` matches process SUBSAMPLE
+Nov-22 21:29:47.140 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Nov-22 21:29:47.141 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Nov-22 21:29:47.142 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'SUBSAMPLE': maxForks=0; fair=false; array=0
+Nov-22 21:29:47.160 [main] DEBUG n.script.dsl.ProcessConfigBuilder - Config settings `withName:ASSEMBLE` matches process ASSEMBLE
+Nov-22 21:29:47.161 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Nov-22 21:29:47.162 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Nov-22 21:29:47.163 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'ASSEMBLE': maxForks=10; fair=false; array=0
+Nov-22 21:29:47.168 [main] DEBUG n.script.dsl.ProcessConfigBuilder - Config settings `withName:COMPRESS` matches process COMPRESS
+Nov-22 21:29:47.169 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Nov-22 21:29:47.169 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Nov-22 21:29:47.169 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'COMPRESS': maxForks=0; fair=false; array=0
+Nov-22 21:29:47.171 [main] DEBUG n.script.dsl.ProcessConfigBuilder - Config settings `withName:CLUSTER` matches process CLUSTER
+Nov-22 21:29:47.172 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Nov-22 21:29:47.172 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Nov-22 21:29:47.173 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'CLUSTER': maxForks=0; fair=false; array=0
+Nov-22 21:29:47.176 [main] DEBUG n.script.dsl.ProcessConfigBuilder - Config settings `withName:RESOLVE_CLUSTERS` matches process RESOLVE_CLUSTERS
+Nov-22 21:29:47.177 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Nov-22 21:29:47.177 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Nov-22 21:29:47.177 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'RESOLVE_CLUSTERS': maxForks=0; fair=false; array=0
+Nov-22 21:29:47.179 [main] DEBUG n.script.dsl.ProcessConfigBuilder - Config settings `withName:COMBINE` matches process COMBINE
+Nov-22 21:29:47.180 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Nov-22 21:29:47.180 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Nov-22 21:29:47.181 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'COMBINE': maxForks=0; fair=false; array=0
+Nov-22 21:29:47.183 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: SUBSAMPLE, COMBINE, ASSEMBLE, GET_GENOME_SIZE, CLUSTER, COMPRESS, RESOLVE_CLUSTERS
+Nov-22 21:29:47.185 [main] DEBUG nextflow.Session - Igniting dataflow network (11)
+Nov-22 21:29:47.190 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > GET_GENOME_SIZE
+Nov-22 21:29:47.191 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > SUBSAMPLE
+Nov-22 21:29:47.192 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > ASSEMBLE
+Nov-22 21:29:47.192 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > COMPRESS
+Nov-22 21:29:47.192 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > CLUSTER
+Nov-22 21:29:47.193 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > RESOLVE_CLUSTERS
+Nov-22 21:29:47.194 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > COMBINE
+Nov-22 21:29:47.194 [PathVisitor-1] DEBUG nextflow.file.PathVisitor - files for syntax: glob; folder: test/autocycler_out/clustering/qc_pass/; pattern: cluster_*; options: [:]
+Nov-22 21:29:47.194 [Actor Thread 13] INFO  nextflow.script.BaseScript - reads_ch item: /home/kevin/Nextflow_autocycler/reads.fastq.gz
+Nov-22 21:29:47.195 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_44c1fc2a0297d3c4: /home/kevin/Nextflow_autocycler/modules/subsample.nf
+  Script_0c725406ba121e4d: /home/kevin/Nextflow_autocycler/modules/assemble.nf
+  Script_7c20cc08fae6ce5f: /home/kevin/Nextflow_autocycler/modules/get_genome_size.nf
+  Script_4a1fc8889416fc05: /home/kevin/Nextflow_autocycler/modules/cluster.nf
+  Script_a1647924afcc4684: /home/kevin/Nextflow_autocycler/main.nf
+  Script_5940bbf934fe6e82: /home/kevin/Nextflow_autocycler/modules/combine.nf
+  Script_cbe2e090d593d967: /home/kevin/Nextflow_autocycler/modules/compress.nf
+  Script_bc174e2cc6c0f000: /home/kevin/Nextflow_autocycler/modules/resolve_cluster.nf
+Nov-22 21:29:47.197 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Nov-22 21:29:47.198 [main] DEBUG nextflow.Session - Session await
+Nov-22 21:29:47.200 [PathVisitor-1] DEBUG nextflow.file.PathVisitor - No such file or directory: test/autocycler_out/clustering/qc_pass/ -- Skipping visit
+Nov-22 21:29:47.213 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [canu, 01]
+Nov-22 21:29:47.214 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [flye, 01]
+Nov-22 21:29:47.215 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [canu, 02]
+Nov-22 21:29:47.215 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [flye, 02]
+Nov-22 21:29:47.216 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [metamdbg, 01]
+Nov-22 21:29:47.216 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [metamdbg, 02]
+Nov-22 21:29:47.216 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [canu, 03]
+Nov-22 21:29:47.217 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [flye, 03]
+Nov-22 21:29:47.217 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [metamdbg, 03]
+Nov-22 21:29:47.218 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [miniasm, 01]
+Nov-22 21:29:47.219 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [miniasm, 02]
+Nov-22 21:29:47.219 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [miniasm, 03]
+Nov-22 21:29:47.220 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [canu, 04]
+Nov-22 21:29:47.220 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [flye, 04]
+Nov-22 21:29:47.221 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [metamdbg, 04]
+Nov-22 21:29:47.221 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [miniasm, 04]
+Nov-22 21:29:47.222 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [necat, 01]
+Nov-22 21:29:47.222 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [necat, 02]
+Nov-22 21:29:47.223 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [necat, 03]
+Nov-22 21:29:47.223 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [necat, 04]
+Nov-22 21:29:47.223 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [nextdenovo, 01]
+Nov-22 21:29:47.224 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [nextdenovo, 02]
+Nov-22 21:29:47.224 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [nextdenovo, 03]
+Nov-22 21:29:47.224 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [nextdenovo, 04]
+Nov-22 21:29:47.225 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [plassembler, 01]
+Nov-22 21:29:47.225 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [plassembler, 02]
+Nov-22 21:29:47.225 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [plassembler, 03]
+Nov-22 21:29:47.226 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [plassembler, 04]
+Nov-22 21:29:47.226 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [raven, 01]
+Nov-22 21:29:47.226 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [raven, 02]
+Nov-22 21:29:47.227 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [raven, 03]
+Nov-22 21:29:47.227 [Actor Thread 14] INFO  nextflow.script.BaseScript - assembly_job: [raven, 04]
+Nov-22 21:29:47.292 [Actor Thread 15] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
+  task: name=GET_GENOME_SIZE (genome_size); work-dir=null
+  error [nextflow.exception.ProcessUnrecoverableException]: Process `GET_GENOME_SIZE (genome_size)` script contains error(s)
+Nov-22 21:29:47.337 [Actor Thread 14] WARN  nextflow.container.SingularityCache - Singularity cache directory has not been defined -- Remote image will be stored in the path: /home/kevin/Nextflow_autocycler/work/singularity -- Use the environment variable NXF_SINGULARITY_CACHEDIR to specify a different location
+Nov-22 21:29:47.338 [Actor Thread 14] INFO  nextflow.container.SingularityCache - Pulling Singularity image docker://Autocycler/autocycler.sif [cache /home/kevin/Nextflow_autocycler/work/singularity/Autocycler-autocycler.sif]
+Nov-22 21:29:47.345 [Actor Thread 15] ERROR nextflow.processor.TaskProcessor - Execution aborted due to an unexpected error
+java.lang.IllegalStateException: java.lang.IllegalStateException: Failed to pull singularity image
+  command: singularity pull  --name Autocycler-autocycler.sif.pulling.1763843387338 docker://Autocycler/autocycler.sif > /dev/null
+  status : 127
+  hint   : Try and increase singularity.pullTimeout in the config (current is "20m")
+  message:
+    bash: line 1: singularity: command not found
+
+	at nextflow.container.SingularityCache.getCachePathFor(SingularityCache.groovy:354)
+	at nextflow.container.ContainerHandler.createSingularityCache(ContainerHandler.groovy:105)
+	at nextflow.container.ContainerHandler.normalizeImageName(ContainerHandler.groovy:72)
+	at nextflow.container.resolver.DefaultContainerResolver.resolveImage0(DefaultContainerResolver.groovy:68)
+	at nextflow.container.resolver.DefaultContainerResolver.resolveImage(DefaultContainerResolver.groovy:61)
+	at org.codehaus.groovy.vmplugin.v8.IndyInterface.fromCache(IndyInterface.java:321)
+	at nextflow.processor.TaskRun.containerInfo0(TaskRun.groovy:722)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:343)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:328)
+	at groovy.lang.MetaClassImpl.doInvokeMethod(MetaClassImpl.java:1339)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1094)
+	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.invokeMethodOnCurrentN(ScriptBytecodeAdapter.java:97)
+	at nextflow.processor.TaskRun.this$dist$invoke$1(TaskRun.groovy)
+	at nextflow.processor.TaskRun$3.methodMissing(TaskRun.groovy)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:343)
+	at groovy.lang.MetaClassImpl.invokeMissingMethod(MetaClassImpl.java:924)
+	at groovy.lang.MetaClassImpl.invokePropertyOrMissing(MetaClassImpl.java:1419)
+	at groovy.lang.MetaClassImpl.doInvokeMethod(MetaClassImpl.java:1341)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1094)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1007)
+	at org.codehaus.groovy.vmplugin.v8.IndyInterface.fromCache(IndyInterface.java:321)
+	at nextflow.processor.TaskRun$3.apply(TaskRun.groovy:703)
+	at nextflow.processor.TaskRun$3.apply(TaskRun.groovy)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1713)
+	at org.codehaus.groovy.vmplugin.v8.IndyInterface.fromCache(IndyInterface.java:321)
+	at nextflow.processor.TaskRun.containerInfo(TaskRun.groovy:700)
+	at org.codehaus.groovy.vmplugin.v8.IndyInterface.fromCache(IndyInterface.java:321)
+	at nextflow.processor.TaskRun.getContainer(TaskRun.groovy:734)
+	at org.codehaus.groovy.vmplugin.v8.IndyInterface.fromCache(IndyInterface.java:321)
+	at nextflow.processor.TaskRun.isContainerEnabled(TaskRun.groovy:800)
+	at org.codehaus.groovy.vmplugin.v8.IndyInterface.fromCache(IndyInterface.java:321)
+	at nextflow.processor.TaskProcessor.formatTaskError(TaskProcessor.groovy:1317)
+	at org.codehaus.groovy.vmplugin.v8.IndyInterface.fromCache(IndyInterface.java:321)
+	at nextflow.processor.TaskProcessor.resumeOrDie(TaskProcessor.groovy:1131)
+	at nextflow.processor.TaskProcessor.resumeOrDie(TaskProcessor.groovy)
+	at org.codehaus.groovy.vmplugin.v8.IndyInterface.fromCache(IndyInterface.java:321)
+	at nextflow.processor.TaskProcessor.handleException(TaskProcessor.groovy:1030)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:343)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:328)
+	at groovy.lang.MetaClassImpl.doInvokeMethod(MetaClassImpl.java:1339)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1094)
+	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.invokeMethodOnCurrentN(ScriptBytecodeAdapter.java:97)
+	at nextflow.processor.TaskProcessor.this$dist$invoke$1(TaskProcessor.groovy)
+	at nextflow.processor.TaskProcessor$TaskProcessorInterceptor.methodMissing(TaskProcessor.groovy)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:343)
+	at groovy.lang.MetaClassImpl.invokeMissingMethod(MetaClassImpl.java:924)
+	at groovy.lang.MetaClassImpl.invokePropertyOrMissing(MetaClassImpl.java:1419)
+	at groovy.lang.MetaClassImpl.doInvokeMethod(MetaClassImpl.java:1341)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1094)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1007)
+	at org.codehaus.groovy.vmplugin.v8.IndyInterface.fromCache(IndyInterface.java:321)
+	at nextflow.processor.TaskProcessor$TaskProcessorInterceptor.onException(TaskProcessor.groovy:2458)
+	at groovyx.gpars.dataflow.operator.DataflowProcessor.fireOnException(DataflowProcessor.java:331)
+	at groovyx.gpars.dataflow.operator.DataflowProcessor.reportError(DataflowProcessor.java:293)
+	at groovyx.gpars.dataflow.operator.DataflowProcessorActor.reportException(DataflowProcessorActor.java:125)
+	at groovyx.gpars.dataflow.operator.DataflowOperatorActor.startTask(DataflowOperatorActor.java:122)
+	at groovyx.gpars.dataflow.operator.ForkingDataflowOperatorActor.access$001(ForkingDataflowOperatorActor.java:35)
+	at groovyx.gpars.dataflow.operator.ForkingDataflowOperatorActor$1.run(ForkingDataflowOperatorActor.java:58)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+Caused by: java.lang.IllegalStateException: Failed to pull singularity image
+  command: singularity pull  --name Autocycler-autocycler.sif.pulling.1763843387338 docker://Autocycler/autocycler.sif > /dev/null
+  status : 127
+  hint   : Try and increase singularity.pullTimeout in the config (current is "20m")
+  message:
+    bash: line 1: singularity: command not found
+
+	at nextflow.container.SingularityCache.runCommand(SingularityCache.groovy:306)
+	at nextflow.container.SingularityCache.downloadContainerImage0(SingularityCache.groovy:273)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:343)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:328)
+	at groovy.lang.MetaClassImpl.doInvokeMethod(MetaClassImpl.java:1339)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1094)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1007)
+	at org.codehaus.groovy.runtime.InvokerHelper.invokePogoMethod(InvokerHelper.java:645)
+	at org.codehaus.groovy.runtime.InvokerHelper.invokeMethod(InvokerHelper.java:628)
+	at org.codehaus.groovy.runtime.InvokerHelper.invokeMethodSafe(InvokerHelper.java:82)
+	at nextflow.container.SingularityCache$_downloadContainerImage_closure1.doCall(SingularityCache.groovy:241)
+	at nextflow.container.SingularityCache$_downloadContainerImage_closure1.call(SingularityCache.groovy)
+	at nextflow.file.FileMutex.lock(FileMutex.groovy:106)
+	at nextflow.container.SingularityCache.downloadContainerImage(SingularityCache.groovy:241)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:343)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:328)
+	at groovy.lang.MetaClassImpl.doInvokeMethod(MetaClassImpl.java:1339)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1094)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1007)
+	at org.codehaus.groovy.runtime.InvokerHelper.invokePogoMethod(InvokerHelper.java:645)
+	at org.codehaus.groovy.runtime.InvokerHelper.invokeMethod(InvokerHelper.java:628)
+	at org.codehaus.groovy.runtime.InvokerHelper.invokeMethodSafe(InvokerHelper.java:82)
+	at nextflow.container.SingularityCache$_getLazyImagePath_closure2.doCall(SingularityCache.groovy:331)
+	at nextflow.container.SingularityCache$_getLazyImagePath_closure2.call(SingularityCache.groovy)
+	at groovyx.gpars.dataflow.LazyDataflowVariable$1.run(LazyDataflowVariable.java:70)
+	... 3 common frames omitted
+Nov-22 21:29:47.356 [Actor Thread 15] DEBUG nextflow.Session - Session aborted -- Cause: Process `GET_GENOME_SIZE (genome_size)` script contains error(s)
+Nov-22 21:29:47.373 [Actor Thread 15] DEBUG nextflow.Session - The following nodes are still active:
+[process] GET_GENOME_SIZE
+  status=ACTIVE
+  port 0: (queue) closed; channel: reads
+  port 1: (cntrl) -     ; channel: $
+
+[process] SUBSAMPLE
+  status=ACTIVE
+  port 0: (queue) OPEN  ; channel: reads
+  port 1: (value) OPEN  ; channel: genome_size
+  port 2: (cntrl) -     ; channel: $
+
+[process] ASSEMBLE
+  status=ACTIVE
+  port 0: (queue) OPEN  ; channel: -
+  port 1: (queue) OPEN  ; channel: subsampled
+  port 2: (value) OPEN  ; channel: genome_size
+  port 3: (cntrl) -     ; channel: $
+
+[process] COMPRESS
+  status=ACTIVE
+  port 0: (queue) OPEN  ; channel: assemblies
+  port 1: (cntrl) -     ; channel: $
+
+[process] CLUSTER
+  status=ACTIVE
+  port 0: (queue) OPEN  ; channel: outdir
+  port 1: (cntrl) -     ; channel: $
+
+Nov-22 21:29:47.384 [Actor Thread 15] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=0; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=0ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=0; peakCpus=0; peakMemory=0; ]
+Nov-22 21:29:47.388 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
+Nov-22 21:29:47.562 [main] DEBUG nextflow.Session - Session await > all processes finished
+Nov-22 21:29:47.562 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Nov-22 21:29:47.562 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=0; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=0ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=0; peakCpus=0; peakMemory=0; ]
+Nov-22 21:29:47.563 [Actor Thread 8] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
+  task: name=GET_GENOME_SIZE; work-dir=null
+  error [java.lang.InterruptedException]: java.lang.InterruptedException
+Nov-22 21:29:47.566 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+Nov-22 21:29:47.577 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye

@@ -6,15 +6,14 @@ process GET_GENOME_SIZE {
     path reads
 
     output:
-    val genome_size
+    path 'genome_size.txt'  
 
     script:
     """
-    genome_size=\$(autocycler helper genome_size \
+    autocycler helper genome_size \
         --reads $reads \
-        --threads $task.cpus)
-
-    echo \$genome_size > genome_size.txt
+        --threads $task.cpus \
+        > genome_size.txt
     """
-    genome_size = file("genome_size.txt").text.trim()
+
 }
