@@ -5,13 +5,17 @@ process COMPRESS {
     path assemblies
 
     output:
-    path "${params.outdir}"
-
+    path "autocycler_out"
+//to add remove empty assemblies
     script:
     """
+    mkdir -p "Assemblies"
+    cp $assemblies Assemblies/
+
+
     autocycler compress \
-        -i assemblies \
-        -a ${params.outdir}
-        -t $task.cpus
+        -i Assemblies \
+        -a autocycler_out \
+        --threads $task.cpus
     """
 }

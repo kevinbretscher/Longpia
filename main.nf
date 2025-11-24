@@ -18,8 +18,7 @@ workflow {
     subsampled_ch = SUBSAMPLE(reads_ch, genome_size_ch)
 
     assemblers = [
-        'canu','flye','metamdbg','miniasm',
-        'necat','nextdenovo','plassembler','raven'
+        'canu','flye','metamdbg','miniasm','necat','nextdenovo','raven'
     ]
     samples = ["01","02","03","04"]
 
@@ -30,13 +29,19 @@ workflow {
 
     assembly_out = ASSEMBLE(assembly_jobs, subsampled_ch, genome_size_ch)
 
-    compressed = COMPRESS(assembly_out)
+    assembly_out.view { it -> println "assembly_out item: $it" }
+
+    collected_assemblies = assembly_out.collect()
+
+    compressed = COMPRESS(collected_assemblies)
+
+    compressed.view { it -> println "compressed item: $it" }
 
     clustered = CLUSTER(compressed)
 
-    cluster_dirs = channel.fromPath("${params.outdir}/clustering/qc_pass/cluster_*")
+    //cluster_dirs = channel.fromPath("${params.outdir}/clustering/qc_pass/cluster_*")
 
-    resolved_clusters = RESOLVE_CLUSTERS(cluster_dirs)
+    resolved_clusters = RESOLVE_CLUSTERS(clustered)
 
-    COMBINE(clustered, resolved_clusters)
+    COMBINE(resolved_clusters)
 }

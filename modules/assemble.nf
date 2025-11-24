@@ -1,13 +1,14 @@
 process ASSEMBLE {
     tag "${assembler}_${sample}"
+    publishDir "${params.outdir}", mode: 'copy'
 
     input:
     tuple val(assembler), val(sample)
-    path subsampled
-    val genome_size
+    each path(subsampled)
+    each genome_size
 
     output:
-    path "assemblies"
+    path "assemblies/${assembler}_${sample}.fasta"
 
     script:
     """

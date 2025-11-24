@@ -1,15 +1,17 @@
 process RESOLVE_CLUSTERS {
-    tag "${cluster}"
+    tag "resolve_clusters"
 
     input:
-    path cluster
+    path autocycler_out
 
     output:
-    path cluster
+    path "$autocycler_out"
 
     script:
     """
-    autocycler trim -c $cluster -t $task.cpus
-    autocycler resolve -c $cluster
+    for c in $autocycler_out/clustering/qc_pass/cluster_*; do
+    autocycler trim -c "\$c" -t $task.cpus
+    autocycler resolve -c "\$c"
+    done
     """
 }

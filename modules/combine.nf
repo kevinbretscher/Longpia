@@ -1,17 +1,17 @@
 process COMBINE {
     tag "combine"
+    publishDir "${params.outdir}", mode: 'copy'
 
     input:
-    path outdir
-    path resolved
+    path autocycler_out
 
     output:
-    path "${params.outdir}/final_assembly.gfa"
+    path autocycler_out
 
     script:
     """
     autocycler combine \
-        -a ${params.outdir} \
-        -i ${params.outdir}/clustering/qc_pass/cluster_*/5_final.gfa
+        -a $autocycler_out \
+        -i $autocycler_out/clustering/qc_pass/cluster_*/5_final.gfa
     """
 }

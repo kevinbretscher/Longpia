@@ -2,13 +2,13 @@ process CLUSTER {
     tag "cluster"
 
     input:
-    path outdir
+    path autocycler_out
 
     output:
-    path outdir
+    path "$autocycler_out"
 
     script:
     """
-    autocycler cluster -a ${params.outdir}
+    autocycler cluster -a $autocycler_out
     """
 }
