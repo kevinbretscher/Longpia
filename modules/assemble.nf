@@ -12,6 +12,7 @@ process ASSEMBLE {
 
     script:
     """
+    mkdir -p /localscratch/users/tmp
     mkdir -p assemblies
     autocycler helper $assembler \
         --reads subsampled_reads/sample_${sample}.fastq \

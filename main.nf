@@ -18,7 +18,7 @@ workflow {
     subsampled_ch = SUBSAMPLE(reads_ch, genome_size_ch)
 
     assemblers = [
-        'canu','flye','metamdbg','miniasm','necat','nextdenovo','raven'
+        'flye','metamdbg','miniasm','necat','raven'
     ]
     samples = ["01","02","03","04"]
 

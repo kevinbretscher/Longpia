@@ -13,6 +13,7 @@ process SUBSAMPLE {
     autocycler subsample \
         --reads $reads \
         --out_dir subsampled_reads \
+        --min_read_depth $params.min_read_depth \
         --genome_size $genome_size
     """
 }

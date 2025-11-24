@@ -1,188 +1,120 @@
-Nov-23 23:52:29.442 [main] DEBUG nextflow.cli.Launcher - $> nextflow run main.nf -profile local
-Nov-23 23:52:29.719 [main] DEBUG nextflow.cli.CmdRun - N E X T F L O W  ~  version 25.10.0
-Nov-23 23:52:29.831 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /home/kevin/Nextflow_autocycler/nextflow.config
-Nov-23 23:52:29.841 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/kevin/Nextflow_autocycler/nextflow.config
-Nov-23 23:52:29.923 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `local`
-Nov-23 23:52:31.249 [main] DEBUG nextflow.config.ConfigBuilder - Available config profiles: [slurm, local]
-Nov-23 23:52:31.354 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/kevin/.nextflow/plugins; core-plugins: nf-amazon@3.4.1,nf-azure@1.20.2,nf-cloudcache@0.5.0,nf-codecommit@0.5.0,nf-console@1.3.0,nf-google@1.23.3,nf-k8s@1.2.2,nf-tower@1.17.1,nf-wave@1.16.1
-Nov-23 23:52:31.388 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
-Nov-23 23:52:31.391 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
-Nov-23 23:52:31.401 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.12.0 in 'deployment' mode
-Nov-23 23:52:31.433 [main] DEBUG nextflow.util.RetryConfig - Missing nextflow session - using default retry config
-Nov-23 23:52:31.785 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
-Nov-23 23:52:31.791 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
-Nov-23 23:52:31.792 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
-Nov-23 23:52:31.840 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/kevin/.nextflow/secrets/store.json
-Nov-23 23:52:31.852 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@770beef5] - activable => nextflow.secret.LocalSecretsProvider@770beef5
-Nov-23 23:52:31.889 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declaration
-Nov-23 23:52:31.936 [main] DEBUG nextflow.cli.CmdRun - Launching `main.nf` [berserk_rubens] DSL2 - revision: ccc5534c42
-Nov-23 23:52:32.112 [main] DEBUG nextflow.Session - Session UUID: 4dede7aa-c528-4e44-8b97-02f138d2fad6
-Nov-23 23:52:32.113 [main] DEBUG nextflow.Session - Run name: berserk_rubens
-Nov-23 23:52:32.114 [main] DEBUG nextflow.Session - Executor pool size: 16
-Nov-23 23:52:32.143 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
-Nov-23 23:52:32.162 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=48; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
-Nov-23 23:52:32.218 [main] DEBUG nextflow.cli.CmdRun - 
+Nov-24 00:31:39.558 [main] DEBUG nextflow.cli.Launcher - $> nextflow run main.nf -profile local -resume
+Nov-24 00:31:39.680 [main] DEBUG nextflow.cli.CmdRun - N E X T F L O W  ~  version 25.10.0
+Nov-24 00:31:39.742 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /home/kevin/Nextflow_autocycler/nextflow.config
+Nov-24 00:31:39.745 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/kevin/Nextflow_autocycler/nextflow.config
+Nov-24 00:31:39.785 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `local`
+Nov-24 00:31:40.461 [main] DEBUG nextflow.config.ConfigBuilder - Available config profiles: [slurm, local]
+Nov-24 00:31:40.529 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/kevin/.nextflow/plugins; core-plugins: nf-amazon@3.4.1,nf-azure@1.20.2,nf-cloudcache@0.5.0,nf-codecommit@0.5.0,nf-console@1.3.0,nf-google@1.23.3,nf-k8s@1.2.2,nf-tower@1.17.1,nf-wave@1.16.1
+Nov-24 00:31:40.551 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Nov-24 00:31:40.553 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Nov-24 00:31:40.558 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.12.0 in 'deployment' mode
+Nov-24 00:31:40.581 [main] DEBUG nextflow.util.RetryConfig - Missing nextflow session - using default retry config
+Nov-24 00:31:40.751 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Nov-24 00:31:40.753 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Nov-24 00:31:40.754 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Nov-24 00:31:40.773 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/kevin/.nextflow/secrets/store.json
+Nov-24 00:31:40.777 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@770beef5] - activable => nextflow.secret.LocalSecretsProvider@770beef5
+Nov-24 00:31:40.791 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declaration
+Nov-24 00:31:40.807 [main] DEBUG nextflow.cli.CmdRun - Launching `main.nf` [exotic_elion] DSL2 - revision: 81f19f11e2
+Nov-24 00:31:40.852 [main] DEBUG nextflow.Session - Session UUID: 4dede7aa-c528-4e44-8b97-02f138d2fad6
+Nov-24 00:31:40.853 [main] DEBUG nextflow.Session - Run name: exotic_elion
+Nov-24 00:31:40.854 [main] DEBUG nextflow.Session - Executor pool size: 16
+Nov-24 00:31:40.865 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Nov-24 00:31:40.871 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=48; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Nov-24 00:31:40.888 [main] DEBUG nextflow.cli.CmdRun - 
   Version: 25.10.0 build 10289
   Created: 22-10-2025 16:26 UTC (18:26 CEST)
   System: Linux 6.8.0-87-generic
   Runtime: Groovy 4.0.28 on OpenJDK 64-Bit Server VM 17.0.16+8-Ubuntu-0ubuntu122.04.1
   Encoding: UTF-8 (UTF-8)
-  Process: 115245@kevin-HP-ProBook-450 [127.0.1.1]
-  CPUs: 16 - Mem: 15.3 GB (2.7 GB) - Swap: 2.2 GB (2.2 GB)
-Nov-23 23:52:32.284 [main] DEBUG nextflow.Session - Work-dir: /home/kevin/Nextflow_autocycler/work [ext2/ext3]
-Nov-23 23:52:32.285 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /home/kevin/Nextflow_autocycler/bin
-Nov-23 23:52:32.304 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
-Nov-23 23:52:32.322 [main] DEBUG nextflow.Session - Observer factory (v2): LinObserverFactory
-Nov-23 23:52:32.328 [main] DEBUG nextflow.Session - Observer factory (v2): DefaultObserverFactory
-Nov-23 23:52:32.433 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
-Nov-23 23:52:32.453 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 17; maxThreads: 1000
-Nov-23 23:52:32.583 [main] DEBUG nextflow.Session - Session start
-Nov-23 23:52:33.189 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
-Nov-23 23:52:34.071 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
-Nov-23 23:52:34.072 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
-Nov-23 23:52:34.090 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
-Nov-23 23:52:34.102 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=16; memory=15.3 GB; capacity=16; pollInterval=100ms; dumpInterval=5m
-Nov-23 23:52:34.108 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
-Nov-23 23:52:34.158 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'GET_GENOME_SIZE': maxForks=2; fair=false; array=0
-Nov-23 23:52:34.238 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
-Nov-23 23:52:34.239 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
-Nov-23 23:52:34.241 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'SUBSAMPLE': maxForks=2; fair=false; array=0
-Nov-23 23:52:34.309 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
-Nov-23 23:52:34.309 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
-Nov-23 23:52:34.311 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'ASSEMBLE': maxForks=2; fair=false; array=0
-Nov-23 23:52:34.313 [main] DEBUG nextflow.processor.TaskProcessor - Creating *combiner* operator for each param(s) at index(es): [1, 2]
-Nov-23 23:52:34.355 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
-Nov-23 23:52:34.355 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
-Nov-23 23:52:34.357 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'COMPRESS': maxForks=2; fair=false; array=0
-Nov-23 23:52:34.368 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
-Nov-23 23:52:34.369 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
-Nov-23 23:52:34.371 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'CLUSTER': maxForks=2; fair=false; array=0
-Nov-23 23:52:34.382 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
-Nov-23 23:52:34.382 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
-Nov-23 23:52:34.384 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'RESOLVE_CLUSTERS': maxForks=2; fair=false; array=0
-Nov-23 23:52:34.391 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
-Nov-23 23:52:34.391 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
-Nov-23 23:52:34.392 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'COMBINE': maxForks=2; fair=false; array=0
-Nov-23 23:52:34.399 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: SUBSAMPLE, COMBINE, ASSEMBLE, GET_GENOME_SIZE, CLUSTER, COMPRESS, RESOLVE_CLUSTERS
-Nov-23 23:52:34.405 [main] DEBUG nextflow.Session - Igniting dataflow network (12)
-Nov-23 23:52:34.417 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > GET_GENOME_SIZE
-Nov-23 23:52:34.418 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > SUBSAMPLE
-Nov-23 23:52:34.421 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > ASSEMBLE
-Nov-23 23:52:34.423 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > ASSEMBLE
-Nov-23 23:52:34.424 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > COMPRESS
-Nov-23 23:52:34.425 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > CLUSTER
-Nov-23 23:52:34.427 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > RESOLVE_CLUSTERS
-Nov-23 23:52:34.427 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > COMBINE
-Nov-23 23:52:34.428 [PathVisitor-1] DEBUG nextflow.file.PathVisitor - files for syntax: glob; folder: ./test/autocycler_out/clustering/qc_pass/; pattern: cluster_*; options: [:]
-Nov-23 23:52:34.430 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
-  Script_66d5a2b9ddc8b6dc: /home/kevin/Nextflow_autocycler/main.nf
+  Process: 123056@kevin-HP-ProBook-450 [127.0.1.1]
+  CPUs: 16 - Mem: 15.3 GB (2.4 GB) - Swap: 2.2 GB (2.2 GB)
+Nov-24 00:31:40.923 [main] DEBUG nextflow.Session - Work-dir: /home/kevin/Nextflow_autocycler/work [ext2/ext3]
+Nov-24 00:31:40.924 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /home/kevin/Nextflow_autocycler/bin
+Nov-24 00:31:40.930 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Nov-24 00:31:40.938 [main] DEBUG nextflow.Session - Observer factory (v2): LinObserverFactory
+Nov-24 00:31:40.942 [main] DEBUG nextflow.Session - Observer factory (v2): DefaultObserverFactory
+Nov-24 00:31:40.979 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Nov-24 00:31:40.987 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 17; maxThreads: 1000
+Nov-24 00:31:41.064 [main] DEBUG nextflow.Session - Session start
+Nov-24 00:31:41.363 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Nov-24 00:31:41.845 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Nov-24 00:31:41.846 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Nov-24 00:31:41.855 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Nov-24 00:31:41.863 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=16; memory=15.3 GB; capacity=16; pollInterval=100ms; dumpInterval=5m
+Nov-24 00:31:41.866 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+Nov-24 00:31:41.891 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'GET_GENOME_SIZE': maxForks=2; fair=false; array=0
+Nov-24 00:31:41.930 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Nov-24 00:31:41.930 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Nov-24 00:31:41.931 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'SUBSAMPLE': maxForks=2; fair=false; array=0
+Nov-24 00:31:41.967 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Nov-24 00:31:41.968 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Nov-24 00:31:41.969 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'ASSEMBLE': maxForks=2; fair=false; array=0
+Nov-24 00:31:41.971 [main] DEBUG nextflow.processor.TaskProcessor - Creating *combiner* operator for each param(s) at index(es): [1, 2]
+Nov-24 00:31:41.988 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Nov-24 00:31:41.988 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Nov-24 00:31:41.999 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'COMPRESS': maxForks=2; fair=false; array=0
+Nov-24 00:31:42.008 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Nov-24 00:31:42.008 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Nov-24 00:31:42.009 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'CLUSTER': maxForks=2; fair=false; array=0
+Nov-24 00:31:42.017 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Nov-24 00:31:42.017 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Nov-24 00:31:42.019 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'RESOLVE_CLUSTERS': maxForks=2; fair=false; array=0
+Nov-24 00:31:42.032 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Nov-24 00:31:42.032 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Nov-24 00:31:42.034 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'COMBINE': maxForks=2; fair=false; array=0
+Nov-24 00:31:42.039 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: SUBSAMPLE, COMBINE, ASSEMBLE, GET_GENOME_SIZE, CLUSTER, COMPRESS, RESOLVE_CLUSTERS
+Nov-24 00:31:42.043 [main] DEBUG nextflow.Session - Igniting dataflow network (11)
+Nov-24 00:31:42.051 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > GET_GENOME_SIZE
+Nov-24 00:31:42.058 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > SUBSAMPLE
+Nov-24 00:31:42.061 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > ASSEMBLE
+Nov-24 00:31:42.062 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > ASSEMBLE
+Nov-24 00:31:42.063 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > COMPRESS
+Nov-24 00:31:42.063 [Actor Thread 13] INFO  nextflow.script.BaseScript - reads_ch item: /home/kevin/Nextflow_autocycler/test/reads.fastq.gz
+Nov-24 00:31:42.063 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > CLUSTER
+Nov-24 00:31:42.065 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > RESOLVE_CLUSTERS
+Nov-24 00:31:42.066 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > COMBINE
+Nov-24 00:31:42.068 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_3d96fd6b1a11fadd: /home/kevin/Nextflow_autocycler/modules/combine.nf
   Script_44c1fc2a0297d3c4: /home/kevin/Nextflow_autocycler/modules/subsample.nf
-  Script_e66c894a7d134e2d: /home/kevin/Nextflow_autocycler/modules/compress.nf
-  Script_4a1fc8889416fc05: /home/kevin/Nextflow_autocycler/modules/cluster.nf
+  Script_0addb5d2d73fc8f3: /home/kevin/Nextflow_autocycler/main.nf
   Script_be21752a91125270: /home/kevin/Nextflow_autocycler/modules/get_genome_size.nf
-  Script_5940bbf934fe6e82: /home/kevin/Nextflow_autocycler/modules/combine.nf
+  Script_9ba01f8371a81113: /home/kevin/Nextflow_autocycler/modules/resolve_cluster.nf
   Script_81521607e3bbfd99: /home/kevin/Nextflow_autocycler/modules/assemble.nf
-  Script_bc174e2cc6c0f000: /home/kevin/Nextflow_autocycler/modules/resolve_cluster.nf
-Nov-23 23:52:34.431 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
-Nov-23 23:52:34.431 [main] DEBUG nextflow.Session - Session await
-Nov-23 23:52:34.431 [Actor Thread 11] INFO  nextflow.script.BaseScript - reads_ch item: /home/kevin/Nextflow_autocycler/test/reads.fastq.gz
-Nov-23 23:52:34.443 [PathVisitor-1] DEBUG nextflow.file.PathVisitor - No such file or directory: ./test/autocycler_out/clustering/qc_pass/ -- Skipping visit
-Nov-23 23:52:34.639 [Actor Thread 13] DEBUG nextflow.conda.CondaCache - conda found local env for environment=/home/kevin/miniforge3/envs/autocycler; path=/home/kevin/miniforge3/envs/autocycler
-Nov-23 23:52:34.755 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Nov-23 23:52:34.759 [Task submitter] INFO  nextflow.Session - [d8/1edcb1] Submitted process > GET_GENOME_SIZE (genome_size)
-Nov-23 23:53:39.571 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: GET_GENOME_SIZE (genome_size); status: COMPLETED; exit: 0; error: -; workDir: /home/kevin/Nextflow_autocycler/work/d8/1edcb134e755566b050d97c558b86f]
-Nov-23 23:53:39.572 [Task monitor] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'TaskFinalizer' minSize=10; maxSize=48; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
-Nov-23 23:53:39.610 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Nov-23 23:53:39.611 [Task submitter] INFO  nextflow.Session - [90/ad3e10] Submitted process > SUBSAMPLE (subsample)
-Nov-23 23:53:39.611 [TaskFinalizer-1] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'PublishDir' minSize=10; maxSize=48; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
-Nov-23 23:53:42.967 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: SUBSAMPLE (subsample); status: COMPLETED; exit: 0; error: -; workDir: /home/kevin/Nextflow_autocycler/work/90/ad3e10adfee2b0935f7f572d8e63be]
-Nov-23 23:53:43.019 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Nov-23 23:53:43.021 [Task submitter] INFO  nextflow.Session - [58/2c1a15] Submitted process > ASSEMBLE (flye_01)
-Nov-23 23:54:58.941 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 3; name: ASSEMBLE (flye_01); status: COMPLETED; exit: 0; error: -; workDir: /home/kevin/Nextflow_autocycler/work/58/2c1a15677cb489f949f38fccb8ab7f]
-Nov-23 23:54:58.944 [Actor Thread 16] INFO  nextflow.script.BaseScript - assembly_out item: /home/kevin/Nextflow_autocycler/work/58/2c1a15677cb489f949f38fccb8ab7f/assemblies/flye_01.fasta
-Nov-23 23:54:58.947 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Nov-23 23:54:58.947 [Task submitter] INFO  nextflow.Session - [b7/eef593] Submitted process > ASSEMBLE (flye_04)
-Nov-23 23:55:40.995 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 6; name: ASSEMBLE (flye_04); status: COMPLETED; exit: 0; error: -; workDir: /home/kevin/Nextflow_autocycler/work/b7/eef59370763018ada61354e5a798a0]
-Nov-23 23:55:40.998 [Actor Thread 16] INFO  nextflow.script.BaseScript - assembly_out item: /home/kevin/Nextflow_autocycler/work/b7/eef59370763018ada61354e5a798a0/assemblies/flye_04.fasta
-Nov-23 23:55:41.000 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Nov-23 23:55:41.001 [Task submitter] INFO  nextflow.Session - [ec/99d4ee] Submitted process > ASSEMBLE (flye_03)
-Nov-23 23:56:21.342 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 5; name: ASSEMBLE (flye_03); status: COMPLETED; exit: 0; error: -; workDir: /home/kevin/Nextflow_autocycler/work/ec/99d4ee4b37cdeb86f2da7d1e5f7aad]
-Nov-23 23:56:21.344 [Actor Thread 16] INFO  nextflow.script.BaseScript - assembly_out item: /home/kevin/Nextflow_autocycler/work/ec/99d4ee4b37cdeb86f2da7d1e5f7aad/assemblies/flye_03.fasta
-Nov-23 23:56:21.346 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Nov-23 23:56:21.347 [Task submitter] INFO  nextflow.Session - [3a/9fea08] Submitted process > ASSEMBLE (flye_02)
-Nov-23 23:57:04.064 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 4; name: ASSEMBLE (flye_02); status: COMPLETED; exit: 0; error: -; workDir: /home/kevin/Nextflow_autocycler/work/3a/9fea08eb0b618f5b343b4e6c7802f4]
-Nov-23 23:57:04.066 [Actor Thread 16] INFO  nextflow.script.BaseScript - assembly_out item: /home/kevin/Nextflow_autocycler/work/3a/9fea08eb0b618f5b343b4e6c7802f4/assemblies/flye_02.fasta
-Nov-23 23:57:04.088 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Nov-23 23:57:04.088 [Task submitter] INFO  nextflow.Session - [02/d113d6] Submitted process > COMPRESS (compress)
-Nov-23 23:57:05.262 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 7; name: COMPRESS (compress); status: COMPLETED; exit: 0; error: -; workDir: /home/kevin/Nextflow_autocycler/work/02/d113d65fc626acdc52ea844d992198]
-Nov-23 23:57:05.264 [Actor Thread 16] INFO  nextflow.script.BaseScript - compressed item: /home/kevin/Nextflow_autocycler/work/02/d113d65fc626acdc52ea844d992198/./test/autocycler_out
-Nov-23 23:57:05.286 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Nov-23 23:57:05.287 [Task submitter] INFO  nextflow.Session - [98/e9725d] Submitted process > CLUSTER (cluster)
-Nov-23 23:57:05.869 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 8; name: CLUSTER (cluster); status: COMPLETED; exit: 1; error: -; workDir: /home/kevin/Nextflow_autocycler/work/98/e9725d75aade15e204f98a6cab9b4e]
-Nov-23 23:57:05.875 [TaskFinalizer-8] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
-  task: name=CLUSTER (cluster); work-dir=/home/kevin/Nextflow_autocycler/work/98/e9725d75aade15e204f98a6cab9b4e
-  error [nextflow.exception.ProcessFailedException]: Process `CLUSTER (cluster)` terminated with an error exit status (1)
-Nov-23 23:57:05.889 [TaskFinalizer-8] ERROR nextflow.processor.TaskProcessor - Error executing process > 'CLUSTER (cluster)'
-
-Caused by:
-  Process `CLUSTER (cluster)` terminated with an error exit status (1)
-
-
-Command executed:
-
-  autocycler cluster -a ./test/autocycler_out
-
-Command exit status:
-  1
-
-Command output:
-  (empty)
-
-Command error:
-  
-  Error: directory does not exist: ./test/autocycler_out
-
-Work dir:
-  /home/kevin/Nextflow_autocycler/work/98/e9725d75aade15e204f98a6cab9b4e
-
-Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
-Nov-23 23:57:05.892 [main] DEBUG nextflow.Session - Session await > all processes finished
-Nov-23 23:57:05.892 [TaskFinalizer-8] DEBUG nextflow.Session - Session aborted -- Cause: Process `CLUSTER (cluster)` terminated with an error exit status (1)
-Nov-23 23:57:05.923 [TaskFinalizer-8] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=7; failedCount=1; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=35m 59s; failedDuration=4s; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=1; peakCpus=8; peakMemory=8 GB; ]
-Nov-23 23:57:05.952 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
-Nov-23 23:57:05.953 [main] DEBUG nextflow.Session - Session await > all barriers passed
-Nov-23 23:57:05.955 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=7; failedCount=1; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=35m 59s; failedDuration=4s; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=1; peakCpus=8; peakMemory=8 GB; ]
-Nov-23 23:57:05.954 [TaskFinalizer-8] DEBUG nextflow.Session - null
-java.lang.InterruptedException: null
-	at java.base/java.lang.Object.wait(Native Method)
-	at java.base/java.lang.Thread.join(Thread.java:1313)
-	at java.base/java.lang.Thread.join(Thread.java:1381)
-	at nextflow.trace.AnsiLogObserver.onFlowComplete(AnsiLogObserver.groovy:520)
-	at nextflow.Session$_notifyFlowComplete_lambda39.doCall(Session.groovy:1121)
-	at nextflow.Session.notifyEvent(Session.groovy:1151)
-	at nextflow.Session.notifyFlowComplete(Session.groovy:1121)
-	at nextflow.Session.shutdown0(Session.groovy:779)
-	at nextflow.Session.abort(Session.groovy:834)
-	at nextflow.Session.fault(Session.groovy:796)
-	at nextflow.processor.TaskPollingMonitor.finalizeTask(TaskPollingMonitor.groovy:753)
-	at nextflow.processor.TaskPollingMonitor.safeFinalizeTask(TaskPollingMonitor.groovy:736)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
-	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:343)
-	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:328)
-	at groovy.lang.MetaClassImpl.doInvokeMethod(MetaClassImpl.java:1339)
-	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1094)
-	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1007)
-	at org.codehaus.groovy.runtime.InvokerHelper.invokePogoMethod(InvokerHelper.java:645)
-	at org.codehaus.groovy.runtime.InvokerHelper.invokeMethod(InvokerHelper.java:628)
-	at org.codehaus.groovy.runtime.InvokerHelper.invokeMethodSafe(InvokerHelper.java:82)
-	at nextflow.processor.TaskPollingMonitor$_checkTaskStatus_lambda8.doCall(TaskPollingMonitor.groovy:726)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:840)
-Nov-23 23:57:06.098 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
-Nov-23 23:57:06.117 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye
+  Script_fa0bf98f5ab2990a: /home/kevin/Nextflow_autocycler/modules/cluster.nf
+  Script_27992ffa73eb478a: /home/kevin/Nextflow_autocycler/modules/compress.nf
+Nov-24 00:31:42.069 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Nov-24 00:31:42.069 [main] DEBUG nextflow.Session - Session await
+Nov-24 00:31:42.224 [Actor Thread 13] DEBUG nextflow.conda.CondaCache - conda found local env for environment=/home/kevin/miniforge3/envs/autocycler; path=/home/kevin/miniforge3/envs/autocycler
+Nov-24 00:31:42.309 [Actor Thread 16] INFO  nextflow.processor.TaskProcessor - [d8/1edcb1] Cached process > GET_GENOME_SIZE (genome_size)
+Nov-24 00:31:42.344 [Actor Thread 17] INFO  nextflow.processor.TaskProcessor - [90/ad3e10] Cached process > SUBSAMPLE (subsample)
+Nov-24 00:31:42.345 [Actor Thread 16] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'PublishDir' minSize=10; maxSize=48; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Nov-24 00:31:42.392 [Actor Thread 16] INFO  nextflow.processor.TaskProcessor - [b7/eef593] Cached process > ASSEMBLE (flye_04)
+Nov-24 00:31:42.392 [Actor Thread 13] INFO  nextflow.processor.TaskProcessor - [58/2c1a15] Cached process > ASSEMBLE (flye_01)
+Nov-24 00:31:42.392 [Actor Thread 11] INFO  nextflow.processor.TaskProcessor - [3a/9fea08] Cached process > ASSEMBLE (flye_02)
+Nov-24 00:31:42.392 [Actor Thread 17] INFO  nextflow.processor.TaskProcessor - [ec/99d4ee] Cached process > ASSEMBLE (flye_03)
+Nov-24 00:31:42.395 [Actor Thread 10] INFO  nextflow.script.BaseScript - assembly_out item: /home/kevin/Nextflow_autocycler/work/b7/eef59370763018ada61354e5a798a0/assemblies/flye_04.fasta
+Nov-24 00:31:42.396 [Actor Thread 10] INFO  nextflow.script.BaseScript - assembly_out item: /home/kevin/Nextflow_autocycler/work/58/2c1a15677cb489f949f38fccb8ab7f/assemblies/flye_01.fasta
+Nov-24 00:31:42.397 [Actor Thread 10] INFO  nextflow.script.BaseScript - assembly_out item: /home/kevin/Nextflow_autocycler/work/3a/9fea08eb0b618f5b343b4e6c7802f4/assemblies/flye_02.fasta
+Nov-24 00:31:42.398 [Actor Thread 10] INFO  nextflow.script.BaseScript - assembly_out item: /home/kevin/Nextflow_autocycler/work/ec/99d4ee4b37cdeb86f2da7d1e5f7aad/assemblies/flye_03.fasta
+Nov-24 00:31:42.412 [Actor Thread 17] INFO  nextflow.processor.TaskProcessor - [da/74de88] Cached process > COMPRESS (compress)
+Nov-24 00:31:42.414 [Actor Thread 16] INFO  nextflow.script.BaseScript - compressed item: /home/kevin/Nextflow_autocycler/work/da/74de88495df4c64299c9536030fa7d/autocycler_out
+Nov-24 00:31:42.480 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Nov-24 00:31:42.482 [Task submitter] INFO  nextflow.Session - [2e/90af17] Submitted process > CLUSTER (cluster)
+Nov-24 00:31:43.059 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 8; name: CLUSTER (cluster); status: COMPLETED; exit: 0; error: -; workDir: /home/kevin/Nextflow_autocycler/work/2e/90af17ec4661ac3afd00957a9e75a1]
+Nov-24 00:31:43.060 [Task monitor] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'TaskFinalizer' minSize=10; maxSize=48; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Nov-24 00:31:43.077 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Nov-24 00:31:43.078 [Task submitter] INFO  nextflow.Session - [e4/216125] Submitted process > RESOLVE_CLUSTERS (resolve_clusters)
+Nov-24 00:31:43.664 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 9; name: RESOLVE_CLUSTERS (resolve_clusters); status: COMPLETED; exit: 0; error: -; workDir: /home/kevin/Nextflow_autocycler/work/e4/21612546caec476400ed3d2d5aa130]
+Nov-24 00:31:43.673 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Nov-24 00:31:43.674 [Task submitter] INFO  nextflow.Session - [2d/c1378d] Submitted process > COMBINE (combine)
+Nov-24 00:31:44.222 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 10; name: COMBINE (combine); status: COMPLETED; exit: 0; error: -; workDir: /home/kevin/Nextflow_autocycler/work/2d/c1378ddf9e52cd811f9ea4c0327790]
+Nov-24 00:31:44.225 [main] DEBUG nextflow.Session - Session await > all processes finished
+Nov-24 00:31:44.323 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
+Nov-24 00:31:44.324 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Nov-24 00:31:44.326 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'TaskFinalizer' shutdown completed (hard=false)
+Nov-24 00:31:44.327 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'PublishDir' shutdown completed (hard=false)
+Nov-24 00:31:44.336 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=3; failedCount=0; ignoredCount=0; cachedCount=7; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=11.6s; failedDuration=0ms; cachedDuration=35m 59s;loadCpus=0; loadMemory=0; peakRunning=1; peakCpus=8; peakMemory=8 GB; ]
+Nov-24 00:31:44.530 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+Nov-24 00:31:44.541 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'FileTransfer' shutdown completed (hard=false)
+Nov-24 00:31:44.541 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye
