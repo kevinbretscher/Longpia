@@ -1,21 +1,24 @@
 process MEDAKA {
     tag "medaka"
+    container "https://depot.galaxyproject.org/singularity/medaka:2.1.1--py39h182ef57_0"
+    publishDir "${params.outdir}", mode: 'copy'
 
     input:
-    tuple val(sampleID), path(subsampled_reads), path(genome_size)
+    tuple val(sampleID), path(longreads)
+    path(autocycler_out)
 
     output:
-    path('*_medaka.fa')
+    path('Polished_Assemblies/*_medaka.fa')
 
     script:
     """
     medaka_consensus \
-        -i \
-        -d  \
+        -i $longreads \
+        -d $autocycler_out/consensus_assembly.fasta \
         -o . \
         -t $task.cpus \
 
-        mv medaka/* . && rm -r medaka/
-        mv consensus.fasta ${sampleID}_medaka.fa
+        mkdir Polished_Assemblies
+        mv consensus.fasta Polished_Assemblies/${sampleID}_medaka.fa
     """
 }

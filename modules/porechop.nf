@@ -12,11 +12,10 @@ process PORECHOP {
 
     script:
     """
-    porechop \\
-        -i $reads \\
-        -t $task.cpus \\
-        $args \\
-        -o ${sampleID}_porechop.fastq.gz \\
+    porechop \
+        -i $reads \
+        -t $task.cpus \
+        -o ${sampleID}_porechop.fastq.gz \
         > ${sampleID}_porechop.log
     """
 }
