@@ -3,19 +3,17 @@ process GET_GENOME_SIZE {
     publishDir "${params.outdir}", mode: 'copy'
 
     input:
-    tuple val(sampleID), path(longreads)
+    path reads
 
     output:
-    tuple val(sampleID), path ("$sampleID/genome_size.txt"), path(longreads)
+    path 'genome_size.txt'  
 
     script:
     """
-    mkdir -p $sampleID
-
     autocycler helper genome_size \
-        --reads $longreads \
+        --reads $reads \
         --threads $task.cpus \
-        > $sampleID/genome_size.txt
+        > genome_size.txt
     """
 
 }

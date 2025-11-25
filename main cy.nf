@@ -10,22 +10,20 @@ include { COMBINE }          from './modules/combine.nf'
 
 workflow {
 
-    ch_input = channel
-    .fromPath('./test/samplesheet.tsv')
-    .splitCsv(sep: '\t', header:true)
 
-    ch_input.view()
 
-    genome_size_ch = GET_GENOME_SIZE(ch_input)
 
-    genome_size_ch.view { it -> println "genome_size_ch item: $it" }
+    
 
-    subsampled_ch = SUBSAMPLE(genome_size_ch)
+    reads_ch = channel.fromPath(params.reads)
+    reads_ch.view { it -> println "reads_ch item: $it" }
 
-    subsampled_ch.view { it -> println "subsampled_ch item: $it" }
+    genome_size_ch = GET_GENOME_SIZE(reads_ch).map { f -> f.text.trim() }
+
+    subsampled_ch = SUBSAMPLE(reads_ch, genome_size_ch)
 
     assemblers = [
-        'flye'
+        'flye','metamdbg','miniasm','necat','raven'
     ]
     samples = ["01","02","03","04"]
 
@@ -34,19 +32,11 @@ workflow {
         .combine(channel.from(samples))
         .map { assembler, sample -> tuple(assembler,sample) }
 
-    assembly_jobs.view { it -> println "assembly_jobs item: $it" }
-
-    assembly_jobs_input = assembly_jobs.combine(subsampled_ch)
-
-    assembly_jobs_input.view { it -> println "assembly_jobs_input item: $it" }
-
-    assembly_out = ASSEMBLE(assembly_jobs_input)
+    assembly_out = ASSEMBLE(assembly_jobs, subsampled_ch, genome_size_ch)
 
     assembly_out.view { it -> println "assembly_out item: $it" }
 
-    collected_assemblies = assembly_out.groupTuple()
-
-    collected_assemblies.view { it -> println "collected_assemblies item: $it" }
+    collected_assemblies = assembly_out.collect()
 
     compressed = COMPRESS(collected_assemblies)
 

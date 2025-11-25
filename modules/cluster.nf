@@ -2,13 +2,14 @@ process CLUSTER {
     tag "cluster"
 
     input:
-    path autocycler_out
+    tuple val(sampleID), path(autocycler_out)
+    
 
     output:
-    path "$autocycler_out"
+    tuple val(sampleID), path("$sampleID")
 
     script:
     """
-    autocycler cluster -a $autocycler_out
+    autocycler cluster -a $sampleID/autocycler_out
     """
 }

@@ -2,18 +2,19 @@ process SUBSAMPLE {
     tag "subsample"
 
     input:
-    path reads
-    val genome_size
+    tuple val(sampleID), path (genome_size), path(longreads)
 
     output:
-    path "subsampled_reads"
+    tuple val(sampleID), path ("$sampleID/subsampled_reads") , path(genome_size)
 
     script:
     """
+    read -r genome_size < $genome_size
+
     autocycler subsample \
-        --reads $reads \
-        --out_dir subsampled_reads \
+        --reads $longreads \
+        --out_dir $sampleID/subsampled_reads \
         --min_read_depth $params.min_read_depth \
-        --genome_size $genome_size
+        --genome_size "\$genome_size"
     """
 }

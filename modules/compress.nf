@@ -2,20 +2,20 @@ process COMPRESS {
     tag "compress"
 
     input:
-    path assemblies
+    tuple val(sampleID), path(assemblies)
 
     output:
-    path "autocycler_out"
+    tuple val(sampleID), path("$sampleID")
 //to add remove empty assemblies
     script:
     """
-    mkdir -p "Assemblies"
-    cp $assemblies Assemblies/
+    mkdir -p "$sampleID/Assemblies"
+    cp $assemblies $sampleID/Assemblies/
 
 
     autocycler compress \
-        -i Assemblies \
-        -a autocycler_out \
+        -i $sampleID/Assemblies \
+        -a $sampleID/autocycler_out \
         --threads $task.cpus
     """
 }

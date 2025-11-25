@@ -3,15 +3,15 @@ process COMBINE {
     publishDir "${params.outdir}", mode: 'copy'
 
     input:
-    path autocycler_out
+    tuple val(sampleID), path(autocycler_out)
 
     output:
-    path autocycler_out
+    path "$sampleID/autocycler_out"
 
     script:
     """
     autocycler combine \
-        -a $autocycler_out \
-        -i $autocycler_out/clustering/qc_pass/cluster_*/5_final.gfa
+        -a $sampleID/autocycler_out \
+        -i $sampleID/autocycler_out/clustering/qc_pass/cluster_*/5_final.gfa
     """
 }
