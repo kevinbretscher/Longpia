@@ -7,8 +7,13 @@ include { COMPRESS }         from './modules/compress.nf'
 include { CLUSTER }          from './modules/cluster.nf'
 include { RESOLVE_CLUSTERS } from './modules/resolve_cluster.nf'
 include { COMBINE }          from './modules/combine.nf'
-include { PORECHOP }          from './modules/porechop.nf'
-include { MEDAKA }          from './modules/medaka.nf'
+include { PORECHOP }         from './modules/porechop.nf'
+include { MEDAKA }           from './modules/medaka.nf'
+
+include { BUSCO }            from './modules/busco.nf'
+include { CHECKM }           from './modules/checkm.nf'
+include { CHECKM2 }          from './modules/checkm2.nf'
+include { INSPECTOR }        from './modules/inspector.nf'
 
 workflow {
 
@@ -78,9 +83,28 @@ workflow {
 
     //Longread polishing with medaka
 
-    MEDAKA(porechop_ch.trimmed_reads, final_assembly_ch)
+    polished_genomes_ch = MEDAKA(porechop_ch.trimmed_reads, final_assembly_ch)
 
     if (params.run_second_stage) {
+
+    polished_genomes_collected_ch = polished_genomes_ch.collect()
+
+    CHECKM(polished_genomes_collected_ch)
+
+    CHECKM2(polished_genomes_collected_ch)
+
+    BUSCO(polished_genomes_collected_ch)
+
+    INSPECTOR(polished_genomes_ch)
+
+
         // Second stage of autocycler workflow can be added here
+    }
+
+    if (params.run_annotation_module) {
+
+    polished_genomes_collected_ch = polished_genomes_ch.collect()
+    // Annotation module can be added here
+
     }
 }
