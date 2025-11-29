@@ -1,6 +1,6 @@
 process CHECKM {
     tag "CheckM"
-    container "Containers/checkm"
+    container "https://depot.galaxyproject.org/singularity/checkm2%3A1.1.0--pyh7e72e81_1"
     publishDir "${params.outdir}", mode: 'copy'
 
     input:

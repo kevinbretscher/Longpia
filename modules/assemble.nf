@@ -10,15 +10,25 @@ process ASSEMBLE {
 
     script:
     """
-    ##mkdir -p /localscratch/users/tmp
     mkdir -p $sampleID/assemblies
 
     read -r genome_size < $genome_size
 
-    autocycler helper $assembler \
-        --reads $subsampled/sample_${sample}.fastq \
-        --out_prefix $sampleID/assemblies/${assembler}_${sample} \
-        --threads $task.cpus \
-        --genome_size "\$genome_size"
+
+    if [[ "$assembler" == "plassembler" ]]; then
+        autocycler helper $assembler \
+            --reads $subsampled/sample_${sample}.fastq \
+            --out_prefix $sampleID/assemblies/${assembler}_${sample} \
+            --threads $task.cpus \
+            --genome_size "\$genome_size" \
+            --args "-d ${params.plassembler_DB}"
+
+    else
+        autocycler helper $assembler \
+            --reads $subsampled/sample_${sample}.fastq \
+            --out_prefix $sampleID/assemblies/${assembler}_${sample} \
+            --threads $task.cpus \
+            --genome_size "\$genome_size"
+    fi
     """
 }

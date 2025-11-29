@@ -1,6 +1,5 @@
 process GET_GENOME_SIZE {
     tag "genome_size"
-    publishDir "${params.outdir}", mode: 'copy'
 
     input:
     tuple val(sampleID), path(longreads)
@@ -10,6 +9,7 @@ process GET_GENOME_SIZE {
 
     script:
     """
+    mkdir -p /localscratch/users/tmp
     mkdir -p $sampleID
 
     autocycler helper genome_size \

@@ -1,6 +1,6 @@
 process BUSCO {
     tag "BUSCO"
-    container "Containers/busco"
+    container "https://depot.galaxyproject.org/singularity/busco%3A6.0.0--pyhdfd78af_1"
     publishDir "${params.outdir}", mode: 'copy'
 
     input:
@@ -20,7 +20,8 @@ process BUSCO {
     --download_path $params.BUSCO_DB \
      -o BUSCO \
      -m genome \
-     -c $task.cpus
+     -c $task.cpus \
+     -l $params.busco_lineage
 
     busco --plot BUSCO
     """

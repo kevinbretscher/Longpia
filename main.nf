@@ -1,5 +1,6 @@
 nextflow.enable.dsl=2
 
+include { NANOPLOT }         from './modules/nanoplot.nf'
 include { GET_GENOME_SIZE }  from './modules/get_genome_size.nf'
 include { SUBSAMPLE }        from './modules/subsample.nf'
 include { ASSEMBLE }         from './modules/assemble.nf'
@@ -14,6 +15,8 @@ include { BUSCO }            from './modules/busco.nf'
 include { CHECKM }           from './modules/checkm.nf'
 include { CHECKM2 }          from './modules/checkm2.nf'
 include { INSPECTOR }        from './modules/inspector.nf'
+include { CRAQ }             from './modules/craq.nf'
+include { MULTIQC }          from './modules/multiqc.nf'
 
 workflow {
 
@@ -24,6 +27,10 @@ workflow {
     ch_input.view()
 
     porechop_ch = PORECHOP(ch_input)
+
+    // NANOPLOT on trimmed reads
+
+    nanoplot_ch = NANOPLOT(porechop_ch.trimmed_reads)
 
     // Start autocycler workflow
 
@@ -85,25 +92,61 @@ workflow {
 
     polished_genomes_ch = MEDAKA(porechop_ch.trimmed_reads, final_assembly_ch)
 
-    if (params.run_second_stage) {
+    //End of assembly and polishing workflow
+
+    // Genome quality assessment modules
+
+    if (params.run_CHECKM) {
 
     polished_genomes_collected_ch = polished_genomes_ch.collect()
 
-    CHECKM(polished_genomes_collected_ch)
+    checkm_ch = CHECKM(polished_genomes_collected_ch)
 
-    CHECKM2(polished_genomes_collected_ch)
-
-    BUSCO(polished_genomes_collected_ch)
-
-    INSPECTOR(polished_genomes_ch)
-
-
-        // Second stage of autocycler workflow can be added here
     }
+
+    if (params.run_CHECKM2) {
+
+    polished_genomes_collected_ch = polished_genomes_ch.collect()
+
+    checkm2_ch = CHECKM2(polished_genomes_collected_ch)
+
+    }
+    
+    if (params.run_BUSCO) {
+
+    polished_genomes_collected_ch = polished_genomes_ch.collect()
+
+    BUSCO_ch = BUSCO(polished_genomes_collected_ch)
+
+    }
+    
+    //MULTIQC()
+
+    MULTIQC(
+        porechop_ch.log.collect().ifEmpty([]),
+        nanoplot_ch.nanoplot_stats.collect().ifEmpty([]),
+        checkm_ch.ifEmpty([]),
+        checkm2_ch.ifEmpty([]),
+        BUSCO_ch.ifEmpty([])
+    )
+
+    
+
+    if (params.run_annotation_plus_module) {
+
+    //polished_genomes_collected_ch = polished_genomes_ch.collect()
+    
+    //INSPECTOR(polished_genomes_ch)
+
+    //CRAQ(polished_genomes_ch)
+
+    }
+
+    // Annotation module
 
     if (params.run_annotation_module) {
 
-    polished_genomes_collected_ch = polished_genomes_ch.collect()
+    //polished_genomes_collected_ch = polished_genomes_ch.collect()
     // Annotation module can be added here
 
     }
