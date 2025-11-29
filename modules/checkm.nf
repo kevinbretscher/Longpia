@@ -1,6 +1,6 @@
 process CHECKM {
     tag "CheckM"
-    container "https://depot.galaxyproject.org/singularity/checkm2%3A1.1.0--pyh7e72e81_1"
+    container "https://depot.galaxyproject.org/singularity/checkm-genome%3A1.2.4--pyhdfd78af_2"
     publishDir "${params.outdir}", mode: 'copy'
 
     input:
@@ -13,7 +13,7 @@ process CHECKM {
 
     """
     mkdir -p Polished_Assemblies
-    mv $polished_genomes/*_medaka.fa Polished_Assemblies/
+    cp $polished_genomes Polished_Assemblies/
 
     checkm data setRoot $params.checkm_DB
 

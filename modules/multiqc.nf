@@ -1,6 +1,8 @@
 process MULTIQC {
-    tag "NANOPLOT"
-    label 'process_low'
+    tag "MultiQC"
+    publishDir "${params.outdir}", mode: 'copy'
+    container "https://depot.galaxyproject.org/singularity/multiqc%3A1.32--pyhdfd78af_1"
+
 
     input:
     path(porechop_logs)
@@ -10,8 +12,8 @@ process MULTIQC {
     path(busco_reports)
 
     output:
-    path(multiqc_report.html)
-    path(multiqc_data)
+    path("multiqc_report.html")
+    path("multiqc_data")
     
     when:
     task.ext.when == null || task.ext.when

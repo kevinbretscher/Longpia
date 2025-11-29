@@ -7,13 +7,13 @@ process CHECKM2 {
     path(polished_genomes)
 
     output:
-    path('checkm')
+    path('CheckM2')
 
     script:
 
     """
     mkdir -p Polished_Assemblies
-    mv $polished_genomes/*_medaka.fa Polished_Assemblies/
+    cp $polished_genomes Polished_Assemblies/
 
     checkm2 predict --input Polished_Assemblies --output-directory CheckM2  \
      --threads $task.cpus \

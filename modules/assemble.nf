@@ -10,6 +10,8 @@ process ASSEMBLE {
 
     script:
     """
+    mkdir -p /localscratch/users/tmp
+
     mkdir -p $sampleID/assemblies
 
     read -r genome_size < $genome_size

@@ -24,7 +24,7 @@ workflow {
     .fromPath('./test/samplesheet.tsv')
     .splitCsv(sep: '\t', header:true)
 
-    ch_input.view()
+    //ch_input.view()
 
     porechop_ch = PORECHOP(ch_input)
 
@@ -36,11 +36,11 @@ workflow {
 
     genome_size_ch = GET_GENOME_SIZE(porechop_ch.trimmed_reads)
 
-    genome_size_ch.view { it -> println "genome_size_ch item: $it" }
+    //genome_size_ch.view { it -> println "genome_size_ch item: $it" }
 
     subsampled_ch = SUBSAMPLE(genome_size_ch)
 
-    subsampled_ch.view { it -> println "subsampled_ch item: $it" }
+    //subsampled_ch.view { it -> println "subsampled_ch item: $it" }
 
     // Create assembly jobs
 
@@ -54,27 +54,27 @@ workflow {
         .combine(channel.from(samples))
         .map { assembler, sample -> tuple(assembler,sample) }
 
-    assembly_jobs.view { it -> println "assembly_jobs item: $it" }
+    //assembly_jobs.view { it -> println "assembly_jobs item: $it" }
 
     assembly_jobs_input = assembly_jobs.combine(subsampled_ch)
 
-    assembly_jobs_input.view { it -> println "assembly_jobs_input item: $it" }
+    //assembly_jobs_input.view { it -> println "assembly_jobs_input item: $it" }
 
     assembly_out = ASSEMBLE(assembly_jobs_input)
 
-    assembly_out.view { it -> println "assembly_out item: $it" }
+    //assembly_out.view { it -> println "assembly_out item: $it" }
 
     // Collect assemblies by sampleID
 
     collected_assemblies = assembly_out.groupTuple()
 
-    collected_assemblies.view { it -> println "collected_assemblies item: $it" }
+    //collected_assemblies.view { it -> println "collected_assemblies item: $it" }
 
     // Compress assemblies into autocycler format
 
     compressed = COMPRESS(collected_assemblies)
 
-    compressed.view { it -> println "compressed item: $it" }
+    //compressed.view { it -> println "compressed item: $it" }
 
     // Cluster assemblies
 
@@ -132,7 +132,7 @@ workflow {
 
     
 
-    if (params.run_annotation_plus_module) {
+    if (params.run_taxonomy_module) {
 
     //polished_genomes_collected_ch = polished_genomes_ch.collect()
     

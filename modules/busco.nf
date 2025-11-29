@@ -13,7 +13,7 @@ process BUSCO {
 
     """
     mkdir -p Polished_Assemblies
-    mv $polished_genomes/*_medaka.fa Polished_Assemblies/
+    cp $polished_genomes Polished_Assemblies/
 
     busco Polished_Assemblies \
     --offline \ 
