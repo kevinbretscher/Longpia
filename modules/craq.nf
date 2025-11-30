@@ -12,7 +12,7 @@ process CRAQ {
     script:
 
     """
-    craq -g $polished_genomes \ 
+    craq -g $polished_genomes \
     -sms $raw_reads \
     -t $task.cpus \
     -D ${sampleID}

@@ -10,8 +10,8 @@ include { RESOLVE_CLUSTERS } from './modules/resolve_cluster.nf'
 include { COMBINE }          from './modules/combine.nf'
 include { PORECHOP }         from './modules/porechop.nf'
 include { MEDAKA }           from './modules/medaka.nf'
-//include { FILTLONG }         from './modules/filtlong.nf'
-//include { CHOPPER }          from './modules/chopper.nf'
+include { FILTLONG }         from './modules/filtlong.nf'
+include { CHOPPER }          from './modules/chopper.nf'
 
 include { BUSCO }            from './modules/busco.nf'
 include { CHECKM }           from './modules/checkm.nf'
@@ -36,13 +36,13 @@ workflow {
     // ──────────────────────────────────────────────
 
     if (params.filtering == 'filtlong') {
-        log.info "🟢 Using Filtlong filtering"
+        log.info "Using Filtlong filtering"
         filtered_ch = FILTLONG(porechop_ch.trimmed_reads)
     } else if (params.filtering == 'chopper') {
-        log.info "🟢 Using Chopper filtering"
+        log.info "Using Chopper filtering"
         filtered_ch = CHOPPER(porechop_ch.trimmed_reads)
     } else if (params.filtering == 'none') {
-        log.info "⚪ No filtering applied"
+        log.info "No filtering applied"
         filtered_ch = porechop_ch.trimmed_reads
     } else {
         error "Unknown filtering option: ${params.filtering}. Use 'none', 'filtlong', or 'chopper'"
