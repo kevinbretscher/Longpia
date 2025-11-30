@@ -8,7 +8,7 @@ process PORECHOP {
 
     output:
     tuple val(sampleID), path("*.fastq.gz"), emit: trimmed_reads
-    tuple val(sampleID), path("*.log")     , emit: log
+    path("*.log")     , emit: log
 
     script:
     """

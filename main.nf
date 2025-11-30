@@ -10,10 +10,13 @@ include { RESOLVE_CLUSTERS } from './modules/resolve_cluster.nf'
 include { COMBINE }          from './modules/combine.nf'
 include { PORECHOP }         from './modules/porechop.nf'
 include { MEDAKA }           from './modules/medaka.nf'
+//include { FILTLONG }         from './modules/filtlong.nf'
+//include { CHOPPER }          from './modules/chopper.nf'
 
 include { BUSCO }            from './modules/busco.nf'
 include { CHECKM }           from './modules/checkm.nf'
 include { CHECKM2 }          from './modules/checkm2.nf'
+include { QUAST }            from './modules/quast.nf'
 include { INSPECTOR }        from './modules/inspector.nf'
 include { CRAQ }             from './modules/craq.nf'
 include { MULTIQC }          from './modules/multiqc.nf'
@@ -28,13 +31,32 @@ workflow {
 
     porechop_ch = PORECHOP(ch_input)
 
+    // ──────────────────────────────────────────────
+    // OPTIONAL FILTERING STEP: filtlong / chopper / none
+    // ──────────────────────────────────────────────
+
+    if (params.filtering == 'filtlong') {
+        log.info "🟢 Using Filtlong filtering"
+        filtered_ch = FILTLONG(porechop_ch.trimmed_reads)
+    } else if (params.filtering == 'chopper') {
+        log.info "🟢 Using Chopper filtering"
+        filtered_ch = CHOPPER(porechop_ch.trimmed_reads)
+    } else if (params.filtering == 'none') {
+        log.info "⚪ No filtering applied"
+        filtered_ch = porechop_ch.trimmed_reads
+    } else {
+        error "Unknown filtering option: ${params.filtering}. Use 'none', 'filtlong', or 'chopper'"
+    }
+
+    // Continue workflow using *filtered_ch*
+
     // NANOPLOT on trimmed reads
 
-    nanoplot_ch = NANOPLOT(porechop_ch.trimmed_reads)
+    nanoplot_ch = NANOPLOT(filtered_ch)
 
     // Start autocycler workflow
 
-    genome_size_ch = GET_GENOME_SIZE(porechop_ch.trimmed_reads)
+    genome_size_ch = GET_GENOME_SIZE(filtered_ch)
 
     //genome_size_ch.view { it -> println "genome_size_ch item: $it" }
 
@@ -90,7 +112,7 @@ workflow {
 
     //Longread polishing with medaka
 
-    polished_genomes_ch = MEDAKA(porechop_ch.trimmed_reads, final_assembly_ch)
+    polished_genomes_ch = MEDAKA(filtered_ch, final_assembly_ch)
 
     //End of assembly and polishing workflow
 
@@ -98,36 +120,71 @@ workflow {
 
     if (params.run_CHECKM) {
 
-    polished_genomes_collected_ch = polished_genomes_ch.collect()
+    channel
+    .fromPath(params.checkm_DB)
+    .set { checkm_db }
 
-    checkm_ch = CHECKM(polished_genomes_collected_ch)
+    polished_genomes_collected_ch = polished_genomes_ch.only_genomes.collect()
+
+    checkm_ch = CHECKM(polished_genomes_collected_ch, checkm_db)
 
     }
 
     if (params.run_CHECKM2) {
 
-    polished_genomes_collected_ch = polished_genomes_ch.collect()
+    channel
+    .fromPath(params.checkm2_DB)
+    .set { checkm2_db }
 
-    checkm2_ch = CHECKM2(polished_genomes_collected_ch)
+    polished_genomes_collected_ch = polished_genomes_ch.only_genomes.collect()
+
+    checkm2_ch = CHECKM2(polished_genomes_collected_ch, checkm2_db)
 
     }
     
     if (params.run_BUSCO) {
 
+    channel
+    .fromPath(params.BUSCO_DB)
+    .set { BUSCO_db }
+
+    polished_genomes_collected_ch = polished_genomes_ch.only_genomes.collect()
+
+    BUSCO_ch = BUSCO(polished_genomes_collected_ch, BUSCO_db)
+
+    }
+
+    if (params.run_QUAST) {
+
+    polished_genomes_collected_ch = polished_genomes_ch.only_genomes.collect()
+
+    QUAST_ch = QUAST(polished_genomes_collected_ch, BUSCO_db)
+
+    }
+
+    if (params.run_INSPECTOR) {
+
+    polished_genomes_collected_ch.combine(filtered_ch, by: 0).view()   
+
+    INSPECTOR(polished_genomes_collected_ch.combine(filtered_ch, by: 0))
+
+    }
+
+    if (params.run_CRAQ) {
+
     polished_genomes_collected_ch = polished_genomes_ch.collect()
 
-    BUSCO_ch = BUSCO(polished_genomes_collected_ch)
+    QUAST(polished_genomes_collected_ch)
 
     }
     
-    //MULTIQC()
-
     MULTIQC(
         porechop_ch.log.collect().ifEmpty([]),
         nanoplot_ch.nanoplot_stats.collect().ifEmpty([]),
         checkm_ch.ifEmpty([]),
         checkm2_ch.ifEmpty([]),
-        BUSCO_ch.ifEmpty([])
+        BUSCO_ch.ifEmpty([]),
+        QUAST_ch.ifEmpty([])
     )
 
     

@@ -8,7 +8,8 @@ process MEDAKA {
     path(autocycler_out)
 
     output:
-    path('Polished_Assemblies/*_medaka.fa')
+    path('Polished_Assemblies/*_medaka.fa'), emit: only_genomes
+    tuple val(sampleID), path('Polished_Assemblies/*_medaka.fa'), emit: medaka_polished_genomes_keyed
 
     script:
     """

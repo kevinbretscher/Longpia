@@ -10,6 +10,7 @@ process MULTIQC {
     path(checkm_reports)
     path(checkm2_reports)
     path(busco_reports)
+    path(quast_reports)
 
     output:
     path("multiqc_report.html")
@@ -23,9 +24,10 @@ process MULTIQC {
     mkdir -p ./collected_reports
     cp $porechop_logs ./collected_reports/
     cp $nanoplot_stats ./collected_reports/
-    cp $checkm_reports/* ./collected_reports/
-    cp $checkm2_reports/* ./collected_reports/
-    cp $busco_reports/* ./collected_reports/
+    cp -r $checkm_reports/* ./collected_reports/
+    cp -r $checkm2_reports/* ./collected_reports/
+    cp -r $busco_reports/* ./collected_reports/
+    cp -r $quast_reports/* ./collected_reports/
 
  
     MultiQC ./collected_reports

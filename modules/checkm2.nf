@@ -5,6 +5,7 @@ process CHECKM2 {
 
     input:
     path(polished_genomes)
+    path(checkm2_DB)
 
     output:
     path('CheckM2')
@@ -17,7 +18,8 @@ process CHECKM2 {
 
     checkm2 predict --input Polished_Assemblies --output-directory CheckM2  \
      --threads $task.cpus \
-     --database_path $params.checkm2_DB
+     --database_path $checkm2_DB \
+     -x .fa
 
     """
 }

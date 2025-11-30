@@ -5,9 +5,10 @@ process BUSCO {
 
     input:
     path(polished_genomes)
+    path(BUSCO_DB)
 
     output:
-    path('BUSCO')
+    path('BUSCO_output')
 
     script:
 
@@ -15,14 +16,15 @@ process BUSCO {
     mkdir -p Polished_Assemblies
     cp $polished_genomes Polished_Assemblies/
 
-    busco Polished_Assemblies \
-    --offline \ 
-    --download_path $params.BUSCO_DB \
-     -o BUSCO \
+    busco -i Polished_Assemblies \
+    --offline \
+    --download_path $BUSCO_DB \
+     -o BUSCO_output \
      -m genome \
      -c $task.cpus \
-     -l $params.busco_lineage
+     --auto-lineage \
+     --force
 
-    busco --plot BUSCO
+    busco --plot BUSCO_output
     """
 }

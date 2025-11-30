@@ -33,6 +33,11 @@ case "$MODE" in
         https://depot.galaxyproject.org/singularity/craq%3A1.10--hdfd78af_0 
         https://depot.galaxyproject.org/singularity/gtdbtk%3A2.5.2--pyh1f0d9b5_0 
 
+        https://depot.galaxyproject.org/singularity/chopper%3A0.12.0--hcdda2d0_0
+        https://depot.galaxyproject.org/singularity/filtlong%3A0.3.1--h077b44d_0
+
+
+
         ;;
 
     apptainer)

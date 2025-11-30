@@ -5,9 +5,10 @@ process CHECKM {
 
     input:
     path(polished_genomes)
+    path(checkm_DB)
 
     output:
-    path('checkm')
+    path('CheckM')
 
     script:
 
@@ -15,7 +16,7 @@ process CHECKM {
     mkdir -p Polished_Assemblies
     cp $polished_genomes Polished_Assemblies/
 
-    checkm data setRoot $params.checkm_DB
+    checkm data setRoot $checkm_DB
 
     checkm lineage_wf -x .fa Polished_Assemblies CheckM -t $task.cpus
     

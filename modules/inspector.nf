@@ -1,20 +1,21 @@
 process INSPECTOR {
     tag "INSPECTOR"
-    container "Containers/inspector"
-    publishDir "${params.outdir}", mode: 'copy'
+    container "https://depot.galaxyproject.org/singularity/inspector%3A1.3.1--hdfd78af_1"
+    publishDir "${params.outdir}/Inspector", mode: 'copy'
 
     input:
-    path(polished_genomes)
+    tuple val(sampleID), path(polished_genomes), path(raw_reads)
 
     output:
-    path('INSPECTOR')
+    path("${sampleID}")
 
     script:
 
     """
-    mkdir -p Polished_Assemblies
-    mv $polished_genomes/*_medaka.fa Polished_Assemblies/
-
-    inspector.py [-h] -c contig.fa -r raw_reads.fa -o output_dict/
+    inspector.py -c $polished_genomes \ 
+    -r $raw_reads \
+    -d nanopore \
+    -t $task.cpus \
+    -o ${sampleID}/
     """
 }

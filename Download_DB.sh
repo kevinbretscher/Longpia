@@ -1,4 +1,6 @@
 
+mkdir -p databases
+
 echo "Downloading CheckM and CheckM2 databases..."
 wget https://data.ace.uq.edu.au/public/CheckM_databases/checkm_data_2015_01_16.tar.gz -O databases/checkm_data_2015_01_16.tar.gz
 mkdir -p databases/checkm

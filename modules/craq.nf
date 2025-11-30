@@ -1,21 +1,20 @@
 process CRAQ {
-    tag "NANOPLOT"
-    label 'process_low'
+    tag "CRAQ"
+    container "https://depot.galaxyproject.org/singularity/craq%3A1.10--hdfd78af_0"
+    publishDir "${params.outdir}/CRAQ", mode: 'copy'
 
     input:
-    tuple val(meta), path(ontfile)
+    tuple val(sampleID), path(polished_genomes), path(raw_reads)
 
     output:
-    tuple val(meta), path(ontfile)
-    
-    when:
-    task.ext.when == null || task.ext.when
+    path("${sampleID}")
 
     script:
+
     """
-    NanoPlot \\
-        $args \\
-        -t $task.cpus \\
-        $input_file
+    craq -g $polished_genomes \ 
+    -sms $raw_reads \
+    -t $task.cpus \
+    -D ${sampleID}
     """
 }
