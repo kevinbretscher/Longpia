@@ -12,7 +12,7 @@ process QUAST {
     script:
 
     """
-    ./quast.py $polished_genomes \
+    quast.py $polished_genomes \
                --threads $task.cpus \
                --output-dir QUAST_output \
                --space-efficient

@@ -22,7 +22,7 @@ process BUSCO {
      -o BUSCO_output \
      -m genome \
      -c $task.cpus \
-     --auto-lineage \
+     -l $params.busco_lineage \
      --force
 
     busco --plot BUSCO_output

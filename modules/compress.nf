@@ -6,12 +6,13 @@ process COMPRESS {
 
     output:
     tuple val(sampleID), path("$sampleID")
-//to add remove empty assemblies
+
     script:
     """
     mkdir -p "$sampleID/Assemblies"
     cp $assemblies $sampleID/Assemblies/
 
+    find $sampleID/Assemblies/ -name '*.fasta' -size 0 -delete
 
     autocycler compress \
         -i $sampleID/Assemblies \

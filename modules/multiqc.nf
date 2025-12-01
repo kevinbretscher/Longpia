@@ -30,6 +30,6 @@ process MULTIQC {
     cp -r $quast_reports/* ./collected_reports/
 
  
-    MultiQC ./collected_reports
+    multiqc ./collected_reports
     """
 }

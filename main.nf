@@ -67,7 +67,7 @@ workflow {
     // Create assembly jobs
 
     assemblers = [
-        'flye'
+        'flye','plassembler'
     ]
     samples = ["01","02","03","04"]
 
@@ -82,7 +82,11 @@ workflow {
 
     //assembly_jobs_input.view { it -> println "assembly_jobs_input item: $it" }
 
-    assembly_out = ASSEMBLE(assembly_jobs_input)
+    channel
+    .fromPath(params.plassembler_DB)
+    .set { plassembler_DB }
+
+    assembly_out = ASSEMBLE(assembly_jobs_input, plassembler_DB)
 
     //assembly_out.view { it -> println "assembly_out item: $it" }
 
@@ -158,23 +162,23 @@ workflow {
 
     polished_genomes_collected_ch = polished_genomes_ch.only_genomes.collect()
 
-    QUAST_ch = QUAST(polished_genomes_collected_ch, BUSCO_db)
+    QUAST_ch = QUAST(polished_genomes_collected_ch)
 
     }
 
     if (params.run_INSPECTOR) {
 
-    polished_genomes_collected_ch.combine(filtered_ch, by: 0).view()   
+    polished_genomes_ch.medaka_polished_genomes_keyed.combine(filtered_ch, by: 0).view()   
 
-    INSPECTOR(polished_genomes_collected_ch.combine(filtered_ch, by: 0))
+    INSPECTOR(polished_genomes_ch.medaka_polished_genomes_keyed.combine(filtered_ch, by: 0))
 
     }
 
     if (params.run_CRAQ) {
 
-    polished_genomes_collected_ch = polished_genomes_ch.collect()
+    polished_genomes_ch.medaka_polished_genomes_keyed.combine(filtered_ch, by: 0).view()   
 
-    QUAST(polished_genomes_collected_ch)
+    CRAQ(polished_genomes_ch.medaka_polished_genomes_keyed.combine(filtered_ch, by: 0))
 
     }
     

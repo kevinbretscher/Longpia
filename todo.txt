@@ -1,1 +1,7 @@
-add filtering and reads qc, nanoplot, nanofilt, filtlong
+add filtering and reads qc,, nanofilt, filtlong
+add Merqury
+busco autolineage?
+barnapp
+Prokka/Bakta
+GTDB-TK
+Antismash?
