@@ -1,5 +1,5 @@
 process CHOPPER {
-    tag "INSPECTOR"
+    tag "CHOPPER"
     container "https://depot.galaxyproject.org/singularity/inspector%3A1.3.1--hdfd78af_1"
     publishDir "${params.outdir}/Inspector", mode: 'copy'
 

@@ -11,6 +11,7 @@ process MULTIQC {
     path(checkm2_reports)
     path(busco_reports)
     path(quast_reports)
+    path(bakta_reports)
 
     output:
     path("multiqc_report.html")
@@ -28,6 +29,7 @@ process MULTIQC {
     cp -r $checkm2_reports/* ./collected_reports/
     cp -r $busco_reports/* ./collected_reports/
     cp -r $quast_reports/* ./collected_reports/
+    cp $bakta_reports ./collected_reports/
 
  
     multiqc ./collected_reports

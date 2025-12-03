@@ -1,21 +1,17 @@
 process FILTLONG {
     tag "INSPECTOR"
-    container "https://depot.galaxyproject.org/singularity/inspector%3A1.3.1--hdfd78af_1"
-    publishDir "${params.outdir}/Inspector", mode: 'copy'
+    container "staphb/filtlong:latest"
 
     input:
-    tuple val(sampleID), path(polished_genomes), path(raw_reads)
+    tuple val(sampleID), path(trimmed_reads)
 
     output:
-    path("${sampleID}")
+    path("${sampleID}_filtered.fastq")
 
     script:
 
     """
-    inspector.py -c $polished_genomes \
-    -r $raw_reads \
-    -d nanopore \
-    -t $task.cpus \
-    -o ${sampleID}/
+    filtlong $params.filtlong_args $trimmed_reads > gzip ${sampleID}_filtered.fastq.gz
+
     """
 }

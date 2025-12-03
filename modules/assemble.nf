@@ -1,5 +1,5 @@
 process ASSEMBLE {
-    tag "${assembler}_${sample}"
+    tag "${sampleID}_${assembler}_${sample}"
     publishDir "${params.outdir}", mode: 'copy'
     errorStrategy 'ignore'
 
@@ -8,7 +8,7 @@ process ASSEMBLE {
     each path(plassembler_DB)
 
     output:
-    tuple val(sampleID), path("$sampleID/assemblies/${assembler}_${sample}.fasta")
+    tuple val(sampleID), path("$sampleID/assemblies/${sampleID}_${assembler}_${sample}.fasta")
 
     script:
     """
@@ -21,18 +21,18 @@ process ASSEMBLE {
 
     if [[ "$assembler" == "plassembler" ]]; then
         export PLASSEMBLER_DB="${plassembler_DB}"
+        export TERM=xterm-256color
         
         autocycler helper $assembler \
             --reads $subsampled/sample_${sample}.fastq \
-            --out_prefix $sampleID/assemblies/${assembler}_${sample} \
+            --out_prefix $sampleID/assemblies/${sampleID}_${assembler}_${sample} \
             --threads $task.cpus \
-            --genome_size "\$genome_size" \
-            --args "-d ${plassembler_DB}"
+            --genome_size "\$genome_size" 
 
     else
         autocycler helper $assembler \
             --reads $subsampled/sample_${sample}.fastq \
-            --out_prefix $sampleID/assemblies/${assembler}_${sample} \
+            --out_prefix $sampleID/assemblies/${sampleID}_${assembler}_${sample} \
             --threads $task.cpus \
             --genome_size "\$genome_size"
     fi

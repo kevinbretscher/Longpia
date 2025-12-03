@@ -1,11 +1,11 @@
-process MEDAKA {
-    tag "medaka"
-    container "ontresearch/medaka:latest"
+process DORADO_POLISH {
+    tag "DORADO_POLISH"
+    container "ontresearch/dorado:latest"
     publishDir "${params.outdir}", mode: 'copy'
 
     input:
-    tuple val(sampleID), path(autocycler_out), path(longreads)
-    
+    tuple val(sampleID), path(longreads)
+    path(autocycler_out)
 
     output:
     path('Polished_Assemblies/*_medaka.fa'), emit: only_genomes
@@ -16,11 +16,11 @@ process MEDAKA {
     medaka_consensus \
         -i $longreads \
         -d $autocycler_out/consensus_assembly.fasta \
+        -o . \
         -t $task.cpus \
-        --bacteria \
-        -f
+        --bacteria
 
         mkdir Polished_Assemblies
-        mv medaka/consensus.fasta Polished_Assemblies/${sampleID}_medaka.fa
+        mv consensus.fasta Polished_Assemblies/${sampleID}_medaka.fa
     """
 }

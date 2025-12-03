@@ -19,6 +19,10 @@ include { CHECKM2 }          from './modules/checkm2.nf'
 include { QUAST }            from './modules/quast.nf'
 include { INSPECTOR }        from './modules/inspector.nf'
 include { CRAQ }             from './modules/craq.nf'
+
+include { BAKTA }            from './modules/bakta.nf'
+
+
 include { MULTIQC }          from './modules/multiqc.nf'
 
 workflow {
@@ -116,7 +120,9 @@ workflow {
 
     //Longread polishing with medaka
 
-    polished_genomes_ch = MEDAKA(filtered_ch, final_assembly_ch)
+    polish_input_ch = final_assembly_ch.combine(filtered_ch, by: 0) // combine by sample ID otherwise reads and assemblies get mixed up
+
+    polished_genomes_ch = MEDAKA(polish_input_ch)
 
     //End of assembly and polishing workflow
 
@@ -182,33 +188,32 @@ workflow {
 
     }
     
+
+
+     // Annotation module
+
+    if (params.run_bakta) {
+
+    channel
+    .fromPath(params.bakta_DB)
+    .set { BAKTA_db }
+
+    bakta_ch = BAKTA(polished_genomes_ch.medaka_polished_genomes_keyed,BAKTA_db)
+
+    }
+
+
+    
+
     MULTIQC(
         porechop_ch.log.collect().ifEmpty([]),
         nanoplot_ch.nanoplot_stats.collect().ifEmpty([]),
         checkm_ch.ifEmpty([]),
         checkm2_ch.ifEmpty([]),
         BUSCO_ch.ifEmpty([]),
-        QUAST_ch.ifEmpty([])
+        QUAST_ch.ifEmpty([]),
+        bakta_ch.bakta_summary.collect().ifEmpty([])
     )
 
-    
 
-    if (params.run_taxonomy_module) {
-
-    //polished_genomes_collected_ch = polished_genomes_ch.collect()
-    
-    //INSPECTOR(polished_genomes_ch)
-
-    //CRAQ(polished_genomes_ch)
-
-    }
-
-    // Annotation module
-
-    if (params.run_annotation_module) {
-
-    //polished_genomes_collected_ch = polished_genomes_ch.collect()
-    // Annotation module can be added here
-
-    }
 }

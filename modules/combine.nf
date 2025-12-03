@@ -6,7 +6,7 @@ process COMBINE {
     tuple val(sampleID), path(autocycler_out)
 
     output:
-    path "$sampleID/autocycler_out"
+    tuple val(sampleID), path ("$sampleID/autocycler_out")
 
     script:
     """

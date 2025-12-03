@@ -5,3 +5,4 @@ barnapp
 Prokka/Bakta
 GTDB-TK
 Antismash?
+Bamdst/qualimap/samtools coverage?
