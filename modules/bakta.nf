@@ -20,6 +20,7 @@ process BAKTA {
     --output ./${sampleID} \
     --prefix ${sampleID}_Bakta \
     --strain $sampleID \
+    --locus-tag $sampleID \
     --verbose
     """
 }

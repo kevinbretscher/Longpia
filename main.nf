@@ -10,8 +10,10 @@ include { RESOLVE_CLUSTERS } from './modules/resolve_cluster.nf'
 include { COMBINE }          from './modules/combine.nf'
 include { PORECHOP }         from './modules/porechop.nf'
 include { MEDAKA }           from './modules/medaka.nf'
+include { DORADO_POLISH }    from './modules/dorado.nf'
 include { FILTLONG }         from './modules/filtlong.nf'
 include { CHOPPER }          from './modules/chopper.nf'
+include { DNAAPLER }          from './modules/dnaapler.nf'
 
 include { BUSCO }            from './modules/busco.nf'
 include { CHECKM }           from './modules/checkm.nf'
@@ -21,7 +23,6 @@ include { INSPECTOR }        from './modules/inspector.nf'
 include { CRAQ }             from './modules/craq.nf'
 
 include { BAKTA }            from './modules/bakta.nf'
-
 
 include { MULTIQC }          from './modules/multiqc.nf'
 
@@ -70,10 +71,11 @@ workflow {
 
     // Create assembly jobs
 
-    assemblers = [
-        'flye','plassembler'
-    ]
-    samples = ["01","02","03","04"]
+    assemblers = params.assembler_list.split(',')*.trim()
+    //samples = ["01","02","03","04"]
+    samples = (1..params.n_samples).collect { num -> String.format('%02d', num)}
+
+    println samples
 
     assembly_jobs = channel
         .from(assemblers)
@@ -124,9 +126,23 @@ workflow {
 
     polished_genomes_ch = MEDAKA(polish_input_ch)
 
+    // Reorientation with DNAAPLER
+
+    reoriented_genomes_ch = DNAAPLER(polished_genomes_ch.only_genomes)
+
     //End of assembly and polishing workflow
 
     // Genome quality assessment modules
+
+
+
+
+
+
+
+
+
+
 
     if (params.run_CHECKM) {
 

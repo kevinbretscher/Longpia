@@ -1,8 +1,9 @@
 add filtering and reads qc,, nanofilt, filtlong
 add Merqury
 busco autolineage?
-barnapp
-Prokka/Bakta
-GTDB-TK
-Antismash?
+Polypolish
+barnapp https://hub.docker.com/r/biocontainers/barrnap
+Prokka https://hub.docker.com/r/staphb/prokka
+GTDB-TK? Sourmash?
+Antismash? Rhizosmash
 Bamdst/qualimap/samtools coverage?
