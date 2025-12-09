@@ -1,5 +1,5 @@
 process MEDAKA {
-    tag "medaka"
+    tag "${sampleID}_medaka"
     container "ontresearch/medaka:latest"
     publishDir "${params.outdir}", mode: 'copy'
 
@@ -17,8 +17,7 @@ process MEDAKA {
         -i $longreads \
         -d $autocycler_out/consensus_assembly.fasta \
         -t $task.cpus \
-        --bacteria \
-        -f
+        --bacteria
 
         mkdir Polished_Assemblies
         mv medaka/consensus.fasta Polished_Assemblies/${sampleID}_medaka.fa

@@ -7,6 +7,7 @@ process MULTIQC {
     input:
     path(porechop_logs)
     path(nanoplot_stats)
+    path(nanoplot_raw_stats)
     path(checkm_reports)
     path(checkm2_reports)
     path(busco_reports)
@@ -22,16 +23,6 @@ process MULTIQC {
 
     script:
     """
-    mkdir -p ./collected_reports
-    cp $porechop_logs ./collected_reports/
-    cp $nanoplot_stats ./collected_reports/
-    cp -r $checkm_reports/* ./collected_reports/
-    cp -r $checkm2_reports/* ./collected_reports/
-    cp -r $busco_reports/* ./collected_reports/
-    cp -r $quast_reports/* ./collected_reports/
-    cp $bakta_reports ./collected_reports/
-
- 
-    multiqc ./collected_reports
+    multiqc .
     """
 }

@@ -1,6 +1,7 @@
 nextflow.enable.dsl=2
 
 include { NANOPLOT }         from './modules/nanoplot.nf'
+include { NANOPLOT_RAW }     from './modules/nanoplot.nf'
 include { GET_GENOME_SIZE }  from './modules/get_genome_size.nf'
 include { SUBSAMPLE }        from './modules/subsample.nf'
 include { ASSEMBLE }         from './modules/assemble.nf'
@@ -13,7 +14,7 @@ include { MEDAKA }           from './modules/medaka.nf'
 include { DORADO_POLISH }    from './modules/dorado.nf'
 include { FILTLONG }         from './modules/filtlong.nf'
 include { CHOPPER }          from './modules/chopper.nf'
-include { DNAAPLER }          from './modules/dnaapler.nf'
+include { DNAAPLER }         from './modules/dnaapler.nf'
 
 include { BUSCO }            from './modules/busco.nf'
 include { CHECKM }           from './modules/checkm.nf'
@@ -33,6 +34,12 @@ workflow {
     .splitCsv(sep: '\t', header:true)
 
     //ch_input.view()
+
+    // NANOPLOT on raw reads
+
+    nanoplot_raw_ch = NANOPLOT_RAW(ch_input)
+
+    // Porechop trimming
 
     porechop_ch = PORECHOP(ch_input)
 
@@ -128,20 +135,11 @@ workflow {
 
     // Reorientation with DNAAPLER
 
-    reoriented_genomes_ch = DNAAPLER(polished_genomes_ch.only_genomes)
+    reoriented_genomes_ch = DNAAPLER(polished_genomes_ch.medaka_polished_genomes_keyed)
 
     //End of assembly and polishing workflow
 
     // Genome quality assessment modules
-
-
-
-
-
-
-
-
-
 
 
     if (params.run_CHECKM) {
@@ -150,7 +148,7 @@ workflow {
     .fromPath(params.checkm_DB)
     .set { checkm_db }
 
-    polished_genomes_collected_ch = polished_genomes_ch.only_genomes.collect()
+    polished_genomes_collected_ch = reoriented_genomes_ch.only_genomes.collect()
 
     checkm_ch = CHECKM(polished_genomes_collected_ch, checkm_db)
 
@@ -162,7 +160,7 @@ workflow {
     .fromPath(params.checkm2_DB)
     .set { checkm2_db }
 
-    polished_genomes_collected_ch = polished_genomes_ch.only_genomes.collect()
+    polished_genomes_collected_ch = reoriented_genomes_ch.only_genomes.collect()
 
     checkm2_ch = CHECKM2(polished_genomes_collected_ch, checkm2_db)
 
@@ -174,7 +172,7 @@ workflow {
     .fromPath(params.BUSCO_DB)
     .set { BUSCO_db }
 
-    polished_genomes_collected_ch = polished_genomes_ch.only_genomes.collect()
+    polished_genomes_collected_ch = reoriented_genomes_ch.only_genomes.collect()
 
     BUSCO_ch = BUSCO(polished_genomes_collected_ch, BUSCO_db)
 
@@ -182,7 +180,7 @@ workflow {
 
     if (params.run_QUAST) {
 
-    polished_genomes_collected_ch = polished_genomes_ch.only_genomes.collect()
+    polished_genomes_collected_ch = reoriented_genomes_ch.only_genomes.collect()
 
     QUAST_ch = QUAST(polished_genomes_collected_ch)
 
@@ -190,17 +188,17 @@ workflow {
 
     if (params.run_INSPECTOR) {
 
-    polished_genomes_ch.medaka_polished_genomes_keyed.combine(filtered_ch, by: 0).view()   
+    reoriented_genomes_ch.genomes_keyed.combine(filtered_ch, by: 0).view()   
 
-    INSPECTOR(polished_genomes_ch.medaka_polished_genomes_keyed.combine(filtered_ch, by: 0))
+    INSPECTOR(reoriented_genomes_ch.genomes_keyed.combine(filtered_ch, by: 0))
 
     }
 
     if (params.run_CRAQ) {
 
-    polished_genomes_ch.medaka_polished_genomes_keyed.combine(filtered_ch, by: 0).view()   
+    reoriented_genomes_ch.genomes_keyed.combine(filtered_ch, by: 0).view()   
 
-    CRAQ(polished_genomes_ch.medaka_polished_genomes_keyed.combine(filtered_ch, by: 0))
+    CRAQ(reoriented_genomes_ch.genomes_keyed.combine(filtered_ch, by: 0))
 
     }
     
@@ -214,7 +212,7 @@ workflow {
     .fromPath(params.bakta_DB)
     .set { BAKTA_db }
 
-    bakta_ch = BAKTA(polished_genomes_ch.medaka_polished_genomes_keyed,BAKTA_db)
+    bakta_ch = BAKTA(reoriented_genomes_ch.genomes_keyed,BAKTA_db)
 
     }
 
@@ -224,6 +222,7 @@ workflow {
     MULTIQC(
         porechop_ch.log.collect().ifEmpty([]),
         nanoplot_ch.nanoplot_stats.collect().ifEmpty([]),
+        nanoplot_raw_ch.nanoplot_stats.collect().ifEmpty([]),
         checkm_ch.ifEmpty([]),
         checkm2_ch.ifEmpty([]),
         BUSCO_ch.ifEmpty([]),

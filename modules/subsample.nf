@@ -15,6 +15,7 @@ process SUBSAMPLE {
         --reads $longreads \
         --out_dir $sampleID/subsampled_reads \
         --min_read_depth $params.min_read_depth \
-        --genome_size "\$genome_size"
+        --genome_size "\$genome_size" \
+        --count $params.n_samples
     """
 }

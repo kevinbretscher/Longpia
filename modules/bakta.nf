@@ -21,6 +21,7 @@ process BAKTA {
     --prefix ${sampleID}_Bakta \
     --strain $sampleID \
     --locus-tag $sampleID \
-    --verbose
+    --verbose \
+    $polished_genomes
     """
 }
