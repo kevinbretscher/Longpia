@@ -1,6 +1,6 @@
 process CHECKM2 {
     tag "CheckM2"
-    container "https://depot.galaxyproject.org/singularity/checkm2%3A1.1.0--pyh7e72e81_1"
+    container "staphb/checkm2:latest"
     publishDir "${params.outdir}", mode: 'copy'
 
     input:
@@ -19,7 +19,7 @@ process CHECKM2 {
     checkm2 predict --input Polished_Assemblies --output-directory CheckM2  \
      --threads $task.cpus \
      --database_path $checkm2_DB \
-     -x .fa
+     -x .fasta
 
     """
 }

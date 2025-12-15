@@ -29,7 +29,7 @@ process NANOPLOT_RAW {
     tuple val(sampleID), path(longreads)
 
     output:
-    path("${sampleID}.txt"), emit: nanoplot_stats
+    path("${sampleID}_raw.txt"), emit: nanoplot_stats
 
     script:
     """

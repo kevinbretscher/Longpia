@@ -1,6 +1,6 @@
 process BUSCO {
     tag "BUSCO"
-    container "https://depot.galaxyproject.org/singularity/busco%3A6.0.0--pyhdfd78af_1"
+    container "ezlabgva/busco:v6.0.0_cv1"
     publishDir "${params.outdir}", mode: 'copy'
 
     input:

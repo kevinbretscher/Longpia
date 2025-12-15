@@ -1,6 +1,6 @@
 process CHECKM {
     tag "CheckM"
-    container "https://depot.galaxyproject.org/singularity/checkm-genome%3A1.2.4--pyhdfd78af_2"
+    container "staphb/checkm:latest"
     publishDir "${params.outdir}", mode: 'copy'
     errorStrategy 'retry'
     maxRetries 2
@@ -21,7 +21,7 @@ process CHECKM {
     export CHECKM_DATA_PATH=$checkm_DB
     checkm data setRoot $checkm_DB
 
-    checkm lineage_wf -x .fa Polished_Assemblies CheckM -t $task.cpus
+    checkm lineage_wf -x .fasta Polished_Assemblies CheckM -t $task.cpus
     
     checkm qa CheckM/lineage.ms CheckM -o 1 --tab_table -q > CheckM/checkm_overview.tsv
 

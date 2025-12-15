@@ -11,10 +11,13 @@ include { RESOLVE_CLUSTERS } from './modules/resolve_cluster.nf'
 include { COMBINE }          from './modules/combine.nf'
 include { PORECHOP }         from './modules/porechop.nf'
 include { MEDAKA }           from './modules/medaka.nf'
+include { MEDAKA_FLYE }      from './modules/medaka.nf'
 include { DORADO_POLISH }    from './modules/dorado.nf'
 include { FILTLONG }         from './modules/filtlong.nf'
 include { CHOPPER }          from './modules/chopper.nf'
 include { DNAAPLER }         from './modules/dnaapler.nf'
+
+include { FLYE }             from './modules/flye.nf'
 
 include { BUSCO }            from './modules/busco.nf'
 include { CHECKM }           from './modules/checkm.nf'
@@ -62,9 +65,18 @@ workflow {
 
     // Continue workflow using *filtered_ch*
 
-    // NANOPLOT on trimmed reads
+    // Kraken2 for contamination check
 
     nanoplot_ch = NANOPLOT(filtered_ch)
+
+    if (params.run_kraken2) {
+
+
+    }
+
+    if (params.assembler == 'autocycler') {
+
+    log.info "Using Autocycler assembler"
 
     // Start autocycler workflow
 
@@ -127,15 +139,38 @@ workflow {
 
     final_assembly_ch = COMBINE(resolved_clusters)
 
+    } else if (params.assembler == 'flye') {
+
+        log.info "Using Flye assembler only"
+        final_assembly_ch = FLYE(filtered_ch)
+
+    } else {
+        error "Unknown assembler option: ${params.assembler}. Use 'autocycler' or 'flye'"
+    }
+
     //Longread polishing with medaka
 
-    polish_input_ch = final_assembly_ch.combine(filtered_ch, by: 0) // combine by sample ID otherwise reads and assemblies get mixed up
+   if (params.polishing_tool == 'medaka' && params.assembler == 'autocycler') {
+        log.info "Medaka polishing selected"
+        polish_input_ch = final_assembly_ch.combine(filtered_ch, by: 0) // combine by sample ID otherwise reads and assemblies get mixed up
+        final_genomes_ch = MEDAKA(polish_input_ch)
 
-    polished_genomes_ch = MEDAKA(polish_input_ch)
+    }  else if (params.polishing_tool == 'medaka' && params.assembler == 'flye') {
+        log.info "Medaka polishing selected"
+        polish_input_ch = final_assembly_ch.combine(filtered_ch, by: 0) // combine by sample ID otherwise reads and assemblies get mixed up
+        final_genomes_ch = MEDAKA_FLYE(polish_input_ch)
+
+    } else if (params.polishing_tool == 'none') {
+        log.info "No polishing applied"
+        final_genomes_ch = final_assembly_ch
+
+    } else {
+        error "Unknown polishing option: ${params.polishing_tool}. Use 'medaka' or 'none'"
+    }
 
     // Reorientation with DNAAPLER
 
-    reoriented_genomes_ch = DNAAPLER(polished_genomes_ch.medaka_polished_genomes_keyed)
+    reoriented_genomes_ch = DNAAPLER(final_genomes_ch.medaka_polished_genomes_keyed)
 
     //End of assembly and polishing workflow
 
@@ -148,9 +183,9 @@ workflow {
     .fromPath(params.checkm_DB)
     .set { checkm_db }
 
-    polished_genomes_collected_ch = reoriented_genomes_ch.only_genomes.collect()
+    reoriented_genomes_collected_ch = reoriented_genomes_ch.only_genomes.collect()
 
-    checkm_ch = CHECKM(polished_genomes_collected_ch, checkm_db)
+    checkm_ch = CHECKM(reoriented_genomes_collected_ch, checkm_db)
 
     }
 
@@ -160,9 +195,9 @@ workflow {
     .fromPath(params.checkm2_DB)
     .set { checkm2_db }
 
-    polished_genomes_collected_ch = reoriented_genomes_ch.only_genomes.collect()
+    reoriented_genomes_collected_ch = reoriented_genomes_ch.only_genomes.collect()
 
-    checkm2_ch = CHECKM2(polished_genomes_collected_ch, checkm2_db)
+    checkm2_ch = CHECKM2(reoriented_genomes_collected_ch, checkm2_db)
 
     }
     
@@ -172,17 +207,17 @@ workflow {
     .fromPath(params.BUSCO_DB)
     .set { BUSCO_db }
 
-    polished_genomes_collected_ch = reoriented_genomes_ch.only_genomes.collect()
+    reoriented_genomes_collected_ch = reoriented_genomes_ch.only_genomes.collect()
 
-    BUSCO_ch = BUSCO(polished_genomes_collected_ch, BUSCO_db)
+    BUSCO_ch = BUSCO(reoriented_genomes_collected_ch, BUSCO_db)
 
     }
 
     if (params.run_QUAST) {
 
-    polished_genomes_collected_ch = reoriented_genomes_ch.only_genomes.collect()
+    reoriented_genomes_collected_ch = reoriented_genomes_ch.only_genomes.collect()
 
-    QUAST_ch = QUAST(polished_genomes_collected_ch)
+    QUAST_ch = QUAST(reoriented_genomes_collected_ch)
 
     }
 
@@ -204,7 +239,7 @@ workflow {
     
 
 
-     // Annotation module
+     // Annotation module & taxonomic classification modules
 
     if (params.run_bakta) {
 
@@ -213,6 +248,14 @@ workflow {
     .set { BAKTA_db }
 
     bakta_ch = BAKTA(reoriented_genomes_ch.genomes_keyed,BAKTA_db)
+
+    }
+
+    if (params.run_gtdbtk) {
+
+    }
+
+    if (params.run_barrnap) {
 
     }
 

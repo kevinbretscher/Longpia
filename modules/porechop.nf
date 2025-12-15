@@ -1,6 +1,6 @@
 process PORECHOP {
     tag "porechop"
-    container "https://depot.galaxyproject.org/singularity/porechop:0.2.4--py39h7cff6ad_2"
+    container "biocontainers/porechop:v0.2.4dfsg-1-deb_cv1"
 
 
     input:

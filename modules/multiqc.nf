@@ -1,7 +1,7 @@
 process MULTIQC {
     tag "MultiQC"
     publishDir "${params.outdir}", mode: 'copy'
-    container "https://depot.galaxyproject.org/singularity/multiqc%3A1.32--pyhdfd78af_1"
+    container "multiqc/multiqc:v1.33"
 
 
     input:

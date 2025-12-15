@@ -5,6 +5,7 @@ process GTDBTK {
 
     input:
     path(polished_genomes)
+    path(gtdbtk_DB)
 
     output:
     path('gtdbtk')

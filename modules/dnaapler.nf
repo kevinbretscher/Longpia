@@ -8,15 +8,14 @@ process DNAAPLER {
     
 
     output:
-    path('*_reoriented.fasta'), emit: only_genomes
-    tuple val(sampleID), path('*_reoriented.fasta'), emit: genomes_keyed
+    path('dnaapler_output/*_reoriented.fasta'), emit: only_genomes
+    tuple val(sampleID), path('dnaapler_output/*_reoriented.fasta'), emit: genomes_keyed
 
     script:
     """
-
     dnaapler all \
         -i $polished_genomes \
-        -o . \
+        -o dnaapler_output \
         -t $task.cpus \
         --prefix ${sampleID} \
         -a nearest
