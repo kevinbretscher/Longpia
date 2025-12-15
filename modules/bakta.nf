@@ -1,5 +1,5 @@
 process BAKTA {
-    tag "Bakta"
+    tag "Bakta_${sampleID}"
     container "oschwengers/bakta"
     publishDir "${params.outdir}/BAKTA", mode: 'copy'
 

@@ -18,6 +18,7 @@ include { CHOPPER }          from './modules/chopper.nf'
 include { DNAAPLER }         from './modules/dnaapler.nf'
 
 include { FLYE }             from './modules/flye.nf'
+include { BARRNAP }          from './modules/barrnap.nf'
 
 include { BUSCO }            from './modules/busco.nf'
 include { CHECKM }           from './modules/checkm.nf'
@@ -29,6 +30,8 @@ include { CRAQ }             from './modules/craq.nf'
 include { BAKTA }            from './modules/bakta.nf'
 
 include { MULTIQC }          from './modules/multiqc.nf'
+
+include { KRAKEN2 }          from './modules/kraken2.nf'
 
 workflow {
 
@@ -71,6 +74,7 @@ workflow {
 
     if (params.run_kraken2) {
 
+    kraken2_ch = KRAKEN2(filtered_ch)
 
     }
 
@@ -251,11 +255,9 @@ workflow {
 
     }
 
-    if (params.run_gtdbtk) {
-
-    }
-
     if (params.run_barrnap) {
+
+    BARRNAP(reoriented_genomes_ch.genomes_keyed)
 
     }
 
@@ -270,7 +272,8 @@ workflow {
         checkm2_ch.ifEmpty([]),
         BUSCO_ch.ifEmpty([]),
         QUAST_ch.ifEmpty([]),
-        bakta_ch.bakta_summary.collect().ifEmpty([])
+        bakta_ch.bakta_summary.collect().ifEmpty([]),
+        kraken2_ch.collect().ifEmpty([])
     )
 
 
