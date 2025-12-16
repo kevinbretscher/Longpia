@@ -7,7 +7,7 @@ process NANOPLOT {
     tuple val(sampleID), path(longreads)
 
     output:
-    path("${sampleID}.txt"), emit: nanoplot_stats
+    path("${sampleID}_after_trimming.txt"), emit: nanoplot_stats
 
     script:
     """
