@@ -1,3 +1,4 @@
-m,l;kl;
-![Build](https://img.shields.io/github/actions/workflow/status/USER/REPO/workflow.yml)
-![License](https://img.shields.io/github/license/USER/REPO)
+# LONGpia
+## A simple & modular nextflow pipeline for assembly and assesment of long-read only bacterial genomes.
+
+### Subsection
