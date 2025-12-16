@@ -7,7 +7,7 @@ process BARRNAP {
     tuple val(sampleID), path(polished_genomes)
 
     output:
-    path('${sampleID}.rRNA.fasta')
+    path("${sampleID}.rRNA.fasta")
 
     script:
 

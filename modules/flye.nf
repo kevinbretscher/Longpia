@@ -7,7 +7,7 @@ process FLYE {
     tuple val(sampleID), path(filtered_reads)
 
     output:
-    tuple val(sampleID), path("$sampleID"), emit: genomes_keyed
+    tuple val(sampleID), path("$sampleID/assembly.fasta"), emit: genomes_keyed
 
     script:
     """

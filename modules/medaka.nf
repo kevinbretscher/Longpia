@@ -42,7 +42,7 @@ process MEDAKA_FLYE {
     """
     medaka_consensus \
         -i $longreads \
-        -d $genome/assembly.fasta \
+        -d $genome \
         -t $task.cpus \
         --bacteria
 
