@@ -1,6 +1,6 @@
 process COMBINE {
     tag "combine"
-    publishDir "${params.outdir}", mode: 'copy'
+    publishDir "${params.outdir}/autocycler_intermediate", mode: 'copy'
 
     input:
     tuple val(sampleID), path(autocycler_out)
