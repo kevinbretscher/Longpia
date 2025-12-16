@@ -7,7 +7,7 @@ process FLYE {
     tuple val(sampleID), path(filtered_reads)
 
     output:
-    tuple val(sampleID), path("$sampleID")
+    tuple val(sampleID), path("$sampleID"), emit: genomes_keyed
 
     script:
     """
@@ -16,7 +16,7 @@ process FLYE {
         --nano-hq $filtered_reads \
         --out-dir $sampleID \
         --threads $task.cpus \
-        {params.flye_options}
+        ${params.flye_options}
 
     """
 }

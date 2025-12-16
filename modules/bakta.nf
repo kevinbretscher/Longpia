@@ -2,6 +2,8 @@ process BAKTA {
     tag "Bakta_${sampleID}"
     container "oschwengers/bakta"
     publishDir "${params.outdir}/BAKTA", mode: 'copy'
+    errorStrategy 'retry'
+    maxRetries 5
 
     input:
     tuple val(sampleID), path(polished_genomes)

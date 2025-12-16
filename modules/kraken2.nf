@@ -7,7 +7,7 @@ process KRAKEN2 {
     each path (DBPATH)
 
     output:
-    path("${sampleID}_report")
+    path("${sampleID}_kraken_report")
 
     script:
     """
@@ -15,7 +15,7 @@ process KRAKEN2 {
     --db $DBPATH \
     --gzip-compressed \
     --threads $task.cpus \
-    --report ${sampleID}_report \
+    --report ${sampleID}_kraken_report \
     $longreads
 
     """

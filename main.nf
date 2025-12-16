@@ -74,7 +74,11 @@ workflow {
 
     if (params.run_kraken2) {
 
-    kraken2_ch = KRAKEN2(filtered_ch)
+    channel
+    .fromPath(params.kraken2_DB)
+    .set { kraken2_db }    
+
+    kraken2_ch = KRAKEN2(filtered_ch, kraken2_db)
 
     }
 
@@ -174,7 +178,7 @@ workflow {
 
     // Reorientation with DNAAPLER
 
-    reoriented_genomes_ch = DNAAPLER(final_genomes_ch.medaka_polished_genomes_keyed)
+    reoriented_genomes_ch = DNAAPLER(final_genomes_ch.genomes_keyed)
 
     //End of assembly and polishing workflow
 
@@ -240,8 +244,6 @@ workflow {
     CRAQ(reoriented_genomes_ch.genomes_keyed.combine(filtered_ch, by: 0))
 
     }
-    
-
 
      // Annotation module & taxonomic classification modules
 
@@ -260,9 +262,7 @@ workflow {
     BARRNAP(reoriented_genomes_ch.genomes_keyed)
 
     }
-
-
-    
+    // Generate MultiQC report
 
     MULTIQC(
         porechop_ch.log.collect().ifEmpty([]),

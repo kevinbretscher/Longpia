@@ -9,7 +9,7 @@ process MEDAKA {
 
     output:
     path('Polished_Assemblies/*_medaka.fa'), emit: only_genomes
-    tuple val(sampleID), path('Polished_Assemblies/*_medaka.fa'), emit: medaka_polished_genomes_keyed
+    tuple val(sampleID), path('Polished_Assemblies/*_medaka.fa'), emit: genomes_keyed
 
     script:
     """
@@ -36,7 +36,7 @@ process MEDAKA_FLYE {
 
     output:
     path('Polished_Assemblies/*_medaka.fa'), emit: only_genomes
-    tuple val(sampleID), path('Polished_Assemblies/*_medaka.fa'), emit: medaka_polished_genomes_keyed
+    tuple val(sampleID), path('Polished_Assemblies/*_medaka.fa'), emit: genomes_keyed
 
     script:
     """

@@ -13,6 +13,7 @@ process MULTIQC {
     path(busco_reports)
     path(quast_reports)
     path(bakta_reports)
+    path(kraken2_reports)
 
     output:
     path("multiqc_report.html")

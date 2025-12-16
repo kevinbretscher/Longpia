@@ -1,4 +1,4 @@
-add filtering and reads qc,, nanofilt, filtlong
+add filtering and reads qc,, nanofilt, filtlong fastplong
 add Merqury
 busco autolineage?
 Polypolish
