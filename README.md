@@ -60,10 +60,15 @@ Several optional tools are provided to assess quality:
 ### Taxonomy
 
 TBA
+Longpia uses skani to assign taxonomy to whole genomes by searching against a Pre-sketched GTDB-R226 database provided by the skani team. This is faster then gtdb-tk and uses less computing power. However this might not give results for novel genomes (< 80% ANI to a reference). The taxanomic classification is therefore meant as a quick check and for proper taxanomic placement of strains I still recommend to try GTDB-tk especially when working with novel isolates. See https://github.com/bluenote-1577/skani/wiki for more info.
 
-### MultiQC report
+That said, isolates that have less then 80% ANI to a reference are generally a rare phenoma when bacteria from well-defined enviroments. 
 
-A multiqc report is generated with the results of Nanoplot, Kraken2, Quast, CheckM, Checkm2 and BUSCO.
+### MultiQC & Longpia report
+
+A multiqc report is generated with the results of Nanoplot, Kraken2, Quast, CheckM, Checkm2, BUSCO and BAKTA.
+
+Longpia report TBA
 
 
 ## Best-practice recomendations
@@ -72,6 +77,11 @@ If time is not an issue and you know you have sufficient coverage use Autocycler
 
 If you need quicker results I recommend running only flye with polishing
 
-If you are not sure if your read length and coverage is enough to assemble unfragmented genomes I recommend running flye without polishing and assess the results. You should see one big contig and potentially some plasmids. Bacterial genomes that are unfragmented can be rerun with Autocycler. 
+If you are not sure if your read length and coverage is enough to assemble unfragmented genomes I recommend running flye without polishing and assess the results. For an unfragmented genome you should see one big contig and potentially some plasmids. Bacterial genomes that are unfragmented can be rerun with Autocycler. 
 
 I recommend running all QC tools as they run in parrallel and take little time. However BUSCO might be problematic when working with unknown isolates (see below).
+
+## Known issues
+
+- Plassembler only assembles plasmids, which means that if your bacteria does not have a plasmid it fails. When resuming the pipeline it will attempt again to assemble with plassembler and therefore also rerun avery step after it. 
+- Bakta sometimes fails at the tRNA annoation step. I am not sure what causes this. 

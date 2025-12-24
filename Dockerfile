@@ -12,9 +12,6 @@ RUN micromamba create -y -n autocycler python=3.12 -c conda-forge -c bioconda cu
     printf "\n" >> /tmp/installed_tools.txt && printf "\n" >> /tmp/missing_tools.txt && \
     micromamba clean --all --yes
 
-# Create plassembler symlink because all scripts expect plassembler.py to be called as plassembler :(
-#RUN ln -s /opt/conda/envs/autocycler/bin/plassembler.py /opt/conda/envs/autocycler/bin/plassembler
-
 # Add environment to PATH
 ENV PATH="/opt/conda/envs/autocycler/bin:$PATH"
 
