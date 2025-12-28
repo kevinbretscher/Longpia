@@ -6,7 +6,7 @@ process FILTLONG {
     tuple val(sampleID), path(trimmed_reads)
 
     output:
-    path("${sampleID}_filtered.fastq")
+    path("${sampleID}_filtered.fastq.gz")
 
     script:
 

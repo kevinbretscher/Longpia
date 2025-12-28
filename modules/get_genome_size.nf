@@ -1,5 +1,6 @@
 process GET_GENOME_SIZE {
     tag "genome_size"
+    container "longpia/autocycler_plassembler_gnu:latest"
 
     input:
     tuple val(sampleID), path(longreads)
@@ -9,8 +10,10 @@ process GET_GENOME_SIZE {
 
     script:
     """
-    mkdir -p /localscratch/users/tmp
     mkdir -p $sampleID
+
+    mkdir -p /tmp
+    export TMPDIR="/tmp"
 
     autocycler helper genome_size \
         --reads $longreads \

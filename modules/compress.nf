@@ -1,5 +1,6 @@
 process COMPRESS {
     tag "compress"
+    container "longpia/autocycler_plassembler_gnu:latest"
 
     input:
     tuple val(sampleID), path(assemblies)

@@ -1,5 +1,6 @@
 process SUBSAMPLE {
     tag "subsample"
+    container "longpia/autocycler_plassembler_gnu:latest"
 
     input:
     tuple val(sampleID), path (genome_size), path(longreads)

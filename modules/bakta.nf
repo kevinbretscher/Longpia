@@ -16,6 +16,11 @@ process BAKTA {
 
     script:
     """
+    mkdir -p /tmp
+
+    export TMPDIR="/tmp"
+    export MPLCONFIGDIR="/tmp"
+    
     bakta \
     --db $DB \
     --threads $task.cpus \

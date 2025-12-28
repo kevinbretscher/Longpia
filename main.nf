@@ -33,6 +33,8 @@ include { MULTIQC }          from './modules/multiqc.nf'
 
 include { KRAKEN2 }          from './modules/kraken2.nf'
 
+include { SKANI_CLASSIFICATION } from './modules/skani.nf'
+
 workflow {
 
     ch_input = channel
@@ -40,6 +42,15 @@ workflow {
     .splitCsv(sep: '\t', header:true)
 
     //ch_input.view()
+
+    //Create empty channels for optional modules
+
+    kraken2_ch = channel.empty()
+    checkm_ch = channel.empty()
+    checkm2_ch = channel.empty()
+    BUSCO_ch = channel.empty()
+    QUAST_ch = channel.empty()
+    bakta_ch = channel.empty() 
 
     // NANOPLOT on raw reads
 
@@ -49,9 +60,7 @@ workflow {
 
     porechop_ch = PORECHOP(ch_input)
 
-    // ──────────────────────────────────────────────
     // OPTIONAL FILTERING STEP: filtlong / chopper / none
-    // ──────────────────────────────────────────────
 
     if (params.filtering == 'filtlong') {
         log.info "Using Filtlong filtering"
@@ -66,11 +75,13 @@ workflow {
         error "Unknown filtering option: ${params.filtering}. Use 'none', 'filtlong', or 'chopper'"
     }
 
-    // Continue workflow using *filtered_ch*
+    // Continue workflow using filtered_ch*
 
-    // Kraken2 for contamination check
+    // NANOPLOT on filtered reads
 
     nanoplot_ch = NANOPLOT(filtered_ch)
+
+    // Kraken2 for contamination check
 
     if (params.run_kraken2) {
 
@@ -82,6 +93,8 @@ workflow {
 
     }
 
+    // Assembly workflow
+
     if (params.assembler == 'autocycler') {
 
     log.info "Using Autocycler assembler"
@@ -90,16 +103,12 @@ workflow {
 
     genome_size_ch = GET_GENOME_SIZE(filtered_ch)
 
-    //genome_size_ch.view { it -> println "genome_size_ch item: $it" }
-
     subsampled_ch = SUBSAMPLE(genome_size_ch)
-
-    //subsampled_ch.view { it -> println "subsampled_ch item: $it" }
 
     // Create assembly jobs
 
     assemblers = params.assembler_list.split(',')*.trim()
-    //samples = ["01","02","03","04"]
+
     samples = (1..params.n_samples).collect { num -> String.format('%02d', num)}
 
     println samples
@@ -109,11 +118,7 @@ workflow {
         .combine(channel.from(samples))
         .map { assembler, sample -> tuple(assembler,sample) }
 
-    //assembly_jobs.view { it -> println "assembly_jobs item: $it" }
-
     assembly_jobs_input = assembly_jobs.combine(subsampled_ch)
-
-    //assembly_jobs_input.view { it -> println "assembly_jobs_input item: $it" }
 
     channel
     .fromPath(params.plassembler_DB)
@@ -121,25 +126,19 @@ workflow {
 
     assembly_out = ASSEMBLE(assembly_jobs_input, plassembler_DB)
 
-    //assembly_out.view { it -> println "assembly_out item: $it" }
-
     // Collect assemblies by sampleID
 
     collected_assemblies = assembly_out.groupTuple()
-
-    //collected_assemblies.view { it -> println "collected_assemblies item: $it" }
 
     // Compress assemblies into autocycler format
 
     compressed = COMPRESS(collected_assemblies)
 
-    //compressed.view { it -> println "compressed item: $it" }
-
     // Cluster assemblies
 
     clustered = CLUSTER(compressed)
 
-    //cluster_dirs = channel.fromPath("${params.outdir}/clustering/qc_pass/cluster_*")
+    // Resolve clusters
 
     resolved_clusters = RESOLVE_CLUSTERS(clustered)
 
@@ -156,11 +155,11 @@ workflow {
         error "Unknown assembler option: ${params.assembler}. Use 'autocycler' or 'flye'"
     }
 
-    //Longread polishing with medaka
+    // Optional longread polishing with medaka
 
    if (params.polishing_tool == 'medaka' && params.assembler == 'autocycler') {
         log.info "Medaka polishing selected"
-        polish_input_ch = final_assembly_ch.combine(filtered_ch, by: 0) // combine by sample ID otherwise reads and assemblies get mixed up
+        polish_input_ch = final_assembly_ch.autocycler_folder.combine(filtered_ch, by: 0) // combine by sample ID otherwise reads and assemblies get mixed up
         final_genomes_ch = MEDAKA(polish_input_ch)
 
     }  else if (params.polishing_tool == 'medaka' && params.assembler == 'flye') {
@@ -180,7 +179,7 @@ workflow {
 
     reoriented_genomes_ch = DNAAPLER(final_genomes_ch.genomes_keyed)
 
-    //End of assembly and polishing workflow
+    // End of assembly and polishing workflow
 
     // Genome quality assessment modules
 
@@ -231,15 +230,11 @@ workflow {
 
     if (params.run_INSPECTOR) {
 
-    reoriented_genomes_ch.genomes_keyed.combine(filtered_ch, by: 0).view()   
-
     INSPECTOR(reoriented_genomes_ch.genomes_keyed.combine(filtered_ch, by: 0))
 
     }
 
     if (params.run_CRAQ) {
-
-    reoriented_genomes_ch.genomes_keyed.combine(filtered_ch, by: 0).view()   
 
     CRAQ(reoriented_genomes_ch.genomes_keyed.combine(filtered_ch, by: 0))
 
@@ -262,6 +257,15 @@ workflow {
     BARRNAP(reoriented_genomes_ch.genomes_keyed)
 
     }
+
+    if (params.run_skani) {
+
+    reoriented_genomes_collected_ch = reoriented_genomes_ch.only_genomes.collect()
+
+    SKANI_CLASSIFICATION(reoriented_genomes_collected_ch)
+
+    }
+
     // Generate MultiQC report
 
     MULTIQC(

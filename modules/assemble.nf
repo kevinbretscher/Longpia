@@ -1,5 +1,6 @@
 process ASSEMBLE {
     tag "${sampleID}_${assembler}_${sample}"
+    container "longpia/autocycler_plassembler_gnu:latest"
     publishDir "${params.outdir}", mode: 'copy'
     errorStrategy 'ignore'
 
@@ -12,12 +13,12 @@ process ASSEMBLE {
 
     script:
     """
-    mkdir -p /localscratch/users/tmp
-
     mkdir -p $sampleID/assemblies
 
     read -r genome_size < $genome_size
 
+    mkdir -p /tmp
+    export TMPDIR="/tmp"
 
     if [[ "$assembler" == "plassembler" ]]; then
         export PLASSEMBLER_DB="${plassembler_DB}"

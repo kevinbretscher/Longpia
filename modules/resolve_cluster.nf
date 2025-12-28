@@ -1,5 +1,6 @@
 process RESOLVE_CLUSTERS {
     tag "resolve_clusters"
+    container "longpia/autocycler_plassembler_gnu:latest"
 
     input:
     tuple val(sampleID), path(autocycler_out)

@@ -5,6 +5,7 @@ process SKANI_CLASSIFICATION {
 
     input:
     path(polished_genomes)
+    path(db)
 
     output:
     path('skani_taxonomy.tsv')
@@ -12,11 +13,7 @@ process SKANI_CLASSIFICATION {
     script:
 
     """
-    quast.py $polished_genomes \
-               --threads $task.cpus \
-               -o QUAST_output
-
-    skani search $polished_genomes -d skani_gtdb_r226-v0.3 -t $task.cpus -o skani_taxonomy.tsv
-
+    skani search $polished_genomes -d $db -t $task.cpus -o skani_taxonomy.tsv
     """
+
 }
