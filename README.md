@@ -74,7 +74,6 @@ Several optional tools are provided to assess quality:
 
 ### Taxonomy
 
-TBA
 Longpia uses skani to assign taxonomy to whole genomes by searching against a Pre-sketched GTDB-R226 database provided by the skani team. This is faster then gtdb-tk and uses less computing power. However this might not give results for novel genomes (< 80% ANI to a reference). The taxanomic classification is therefore meant as a quick check and for proper taxanomic placement of strains I still recommend to try GTDB-tk especially when working with novel isolates. See https://github.com/bluenote-1577/skani/wiki for more info.
 
 That said, isolates that have less then 80% ANI to a reference are generally a rare phenoma when bacteria from well-defined enviroments. 
@@ -84,6 +83,7 @@ That said, isolates that have less then 80% ANI to a reference are generally a r
 A multiqc report is generated with the results of Nanoplot, Kraken2, Quast, CheckM, Checkm2, BUSCO and BAKTA.
 
 Longpia report TBA
+Longpia reports combines output of CRAQ, Inspector, CheckM and other tool into a single TSV. Which can be useful for quality assesment and visualization. 
 
 
 ## Best-practice recomendations
@@ -101,3 +101,4 @@ I recommend running all QC tools as they run in parrallel and take little time. 
 - Plassembler only assembles plasmids, which means that if your bacteria does not have a plasmid it fails. When resuming the pipeline it will attempt again to assemble with plassembler and therefore also rerun avery step after it. I'm working on a way to prevent this but for now it is best to not use plassembler when asssembling genomes without plasmid. 
 - Other assembler might also randomly fail. Again when rerunning they will be run again.
 - Bakta sometimes fails at the tRNA annoation step. I am not sure what causes this. 
+- Currently nextflow reports cannot be generated as some containers are missing essential tools.
