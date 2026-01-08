@@ -1,10 +1,8 @@
 crate emtpy fasta when plassembler fails
 add filtering and reads qc,, nanofilt, filtlong fastplong
+filter common contaminants?
 add Merqury
 busco autolineage?
 Polypolish
-barnapp https://hub.docker.com/r/biocontainers/barrnap
 Prokka https://hub.docker.com/r/staphb/prokka
-GTDB-TK? Sourmash?
-Antismash? Rhizosmash
 Bamdst/qualimap/samtools coverage?

@@ -2,7 +2,22 @@
 ## A simple & modular nextflow pipeline for assembly and assesment of long-read only bacterial genomes.
 
 ### Introduction
-LONGpia was developed as a simple and modular nextflow pipeline that can work on HPCs. Longpia aims to provide a best-practice workflow for assembling bacterial genomes from Nanopore R10.4.1 longread data.
+LONGpia was developed as a simple and modular nextflow pipeline that works on HPCs. Longpia aims to provide a (i.m.o.) best-practice workflow for assembling bacterial genomes from Nanopore R10.4.1 longread data. It is build around Ryan wick's autocycler.
+
+It is currently in early development
+
+## Requirements and installation
+
+You will need to install:
+
+- Nextflow 24+
+- Singularity / apptainer / docker
+
+Depending on the tools you are gonna use you might need to download databases.
+
+The main nextflow script need to be run on a server or node with internet so that containers can be pulled. 
+
+If you are using a (slurm) HPC you will also need to set up a configuration or profile for you system, it is best to consult your server administrator for this. Also make sure to set the resources.config to appropriate values.
 
 ## Pipeline overview and steps
 
@@ -10,7 +25,7 @@ LONGpia was developed as a simple and modular nextflow pipeline that can work on
 
 Porechop is used to remove barcodes from the start, middle or end of the reads. While this is usually already done when basecalling some barcodes can be left behind.
 
-LONGpia offers several optional filtering tools. Including Filtlong, Nanofilt(tba) and fastplong(tba). These are run after porechop.
+LONGpia offers several optional filtering tools. Including Filtlong, Nanofilt (tba) and fastplong(tba). These are run after porechop. There are no default parameters so settings for filtering need to be configured
 
 Kraken2 is used to classify reads. In case of contamininated assembles this can be used to troubleshoot. (Optionally)
 
@@ -73,9 +88,9 @@ Longpia report TBA
 
 ## Best-practice recomendations
 
-If time is not an issue and you know you have sufficient coverage use Autocycler with several assemblers (with polishing). This should yield the highest quality genomes. To have unfragmented assemblies you often need reads long enough
+If time is not an issue and you know you have sufficient coverage use Autocycler with several assemblers (with polishing). This should yield the highest quality genomes. To have unfragmented assemblies you often need reads long enough. see autocycler wiki ...
 
-If you need quicker results I recommend running only flye with polishing
+If you need quicker results I recommend running only flye with polishing.
 
 If you are not sure if your read length and coverage is enough to assemble unfragmented genomes I recommend running flye without polishing and assess the results. For an unfragmented genome you should see one big contig and potentially some plasmids. Bacterial genomes that are unfragmented can be rerun with Autocycler. 
 
@@ -83,5 +98,6 @@ I recommend running all QC tools as they run in parrallel and take little time. 
 
 ## Known issues
 
-- Plassembler only assembles plasmids, which means that if your bacteria does not have a plasmid it fails. When resuming the pipeline it will attempt again to assemble with plassembler and therefore also rerun avery step after it. 
+- Plassembler only assembles plasmids, which means that if your bacteria does not have a plasmid it fails. When resuming the pipeline it will attempt again to assemble with plassembler and therefore also rerun avery step after it. I'm working on a way to prevent this but for now it is best to not use plassembler when asssembling genomes without plasmid. 
+- Other assembler might also randomly fail. Again when rerunning they will be run again.
 - Bakta sometimes fails at the tRNA annoation step. I am not sure what causes this. 
