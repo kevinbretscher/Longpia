@@ -6,12 +6,12 @@ process FILTLONG {
     tuple val(sampleID), path(trimmed_reads)
 
     output:
-    path("${sampleID}_filtered.fastq.gz")
+    tuple val(sampleID), path("${sampleID}_filtered.fastq.gz")
 
     script:
 
     """
-    filtlong $params.filtlong_args $trimmed_reads > gzip ${sampleID}_filtered.fastq.gz
+    filtlong $params.filtering_arg $trimmed_reads | gzip > ${sampleID}_filtered.fastq.gz
 
     """
 }

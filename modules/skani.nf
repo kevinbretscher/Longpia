@@ -8,12 +8,13 @@ process SKANI_CLASSIFICATION {
     path(db)
 
     output:
-    path('skani_taxonomy.tsv')
+    path('skani_taxonomy.txt')
 
     script:
 
     """
-    skani search $polished_genomes -d $db -t $task.cpus -o skani_taxonomy.tsv
+    echo "Running SKANI classification on polished genomes"
+    skani search $polished_genomes -d $db -t $task.cpus -o skani_taxonomy.txt --debug
     """
 
 }
