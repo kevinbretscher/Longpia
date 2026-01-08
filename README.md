@@ -4,7 +4,9 @@
 ### Introduction
 LONGpia was developed as a simple and modular nextflow pipeline that works on HPCs. Longpia aims to provide a (i.m.o.) best-practice workflow for assembling bacterial genomes from Nanopore R10.4.1 longread data. It is build around Ryan wick's autocycler.
 
-It is currently in early development
+It is currently in early development.
+
+LONGpia is heavily inspired by other pipelines such as NF-core Bacass and bactopia. However these tools did not always hav the latest assemblers/polisher or the option to use autocycler. If LONGpia does not work for you I recommend checking out one of these. 
 
 ## Requirements and installation
 
@@ -13,9 +15,13 @@ You will need to install:
 - Nextflow 24+
 - Singularity / apptainer / docker
 
-Depending on the tools you are gonna use you might need to download databases.
+### downloading databases
 
-The main nextflow script need to be run on a server or node with internet so that containers can be pulled. 
+Depending on the tools you are gonna use you might need to download databases. You can run the Download_DB.sh script to download the databases for CheckM, CheckM2 and Plassembler. Download_skani.sh can be used to download the pre-sketched skani GTDB-TK database. Other databases (BUSCO, BAKTA) need to be downloaded manually with the appropriate tool.  
+
+### Running LONGpia
+
+The main nextflow script need to be run on a server or node with internet so that containers can be pulled. The individual processes/jobs do not require internet.
 
 If you are using a (slurm) HPC you will also need to set up a configuration or profile for you system, it is best to consult your server administrator for this. Also make sure to set the resources.config to appropriate values.
 
