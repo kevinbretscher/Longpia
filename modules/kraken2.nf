@@ -1,5 +1,6 @@
 process KRAKEN2 {
     tag "KRAKEN_${sampleID}"
+    publishDir "${params.outdir}/Kraken2", mode: 'copy'
     container "staphb/kraken2:latest"
 
     input:
