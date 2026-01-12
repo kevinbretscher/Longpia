@@ -17,7 +17,7 @@ You will need to install:
 
 ### downloading databases
 
-Depending on the tools you are gonna use you might need to download databases. You can run the Download_DB.sh script to download the databases for CheckM, CheckM2 and Plassembler. Download_skani.sh can be used to download the pre-sketched skani GTDB-TK database. Other databases (BUSCO, BAKTA) need to be downloaded manually with the appropriate tool.  
+Depending on the tools you are gonna use you might need to download databases. You can run the Download_DB.sh script to download the databases for CheckM, CheckM2 and Plassembler. Download_skani.sh can be used to download the pre-sketched skani GTDB-TK database. Other databases (BUSCO, BAKTA, Kraken) need to be downloaded manually with the appropriate tool. Precompiled kraken datbases can be found here: https://benlangmead.github.io/aws-indexes/k2, I tend to use standard or PlusPF. 
 
 ### Running LONGpia
 
@@ -41,18 +41,18 @@ Before and after filtering quality stats are done with Nanoplot
 
 For assembly two options are available:
 
-- Autocycler (The following assemblers are available:)
+- Autocycler (The following assemblers are available: canu,flye,metamdbg,miniasm,necat,nextdenovo,raven, plassembler)
 - Flye
 
 For Autocycler a suite of assemblers can be chosen. The assemblies are run in parrallel. Generally Autocycler should give you better final assemblies. However it does require the majority of assemblies to be complete. Therefore if you have shorter reads and/or lower coverage I reccomend try Flye first to see of complete assemblies can be made. (see: )
 
 ### Polishing
 
-Optional polishing can be done with Medaka. 
+Optional polishing can be done with Medaka. Please keep in mind that Medaka polishing models are trained on unpolished flye assemblies, not on autocycler assemblies. In my experience Polishing still improved the assembly, however it is wise to check if that is the case with your own data. 
 
 I intend to replace this with Dorado polish as it seems Nanopore is moving towards that, however currently there are some issues with the size of the docker+models.
 
-Short-read polishing is currently not supported. 
+Short-read polishing is currently not supported.
 
 ### Reorientation
 
