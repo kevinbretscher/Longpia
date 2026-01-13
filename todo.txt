@@ -1,5 +1,5 @@
 crate emtpy fasta when plassembler fails
-add filtering and reads qc,, nanofilt, filtlong fastplong
+add filtering and reads qc,, nanofilt fastplong
 filter common contaminants?
 add Merqury
 busco autolineage?

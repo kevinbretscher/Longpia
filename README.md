@@ -115,3 +115,4 @@ I recommend running all QC tools as they run in parrallel and take little time. 
 - Bakta sometimes fails at the tRNA annoation step. I am not sure what causes this. 
 - Currently nextflow reports cannot be generated as some containers are missing essential tools.
 - Medaka seems to run slower then other pipelines. I suspect it is because we use a much more recent version with more recent models.
+- Longpia will finish all assembly jobs before continueing.

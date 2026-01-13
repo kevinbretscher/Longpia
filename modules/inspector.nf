@@ -1,6 +1,6 @@
 process INSPECTOR {
     tag "INSPECTOR"
-    container "longpia/inspector:1.3"
+    container "longpia/inspector:latest"
     publishDir "${params.outdir}/Inspector", mode: 'copy'
 
     input:
