@@ -260,9 +260,13 @@ workflow {
 
     if (params.run_skani) {
 
+    channel
+    .fromPath(params.skani_DB)
+    .set { SKANI_db }
+
     reoriented_genomes_collected_ch = reoriented_genomes_ch.only_genomes.collect()
 
-    SKANI_CLASSIFICATION(reoriented_genomes_collected_ch)
+    SKANI_CLASSIFICATION(reoriented_genomes_collected_ch, SKANI_db)
 
     }
 
