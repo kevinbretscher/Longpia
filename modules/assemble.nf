@@ -1,7 +1,7 @@
 process ASSEMBLE {
     tag "${sampleID}_${assembler}_${sample}"
     container "longpia/autocycler_plassembler_gnu:latest"
-    publishDir "${params.outdir}", mode: 'copy'
+    publishDir "${params.outdir}/autocycler_intermediate", mode: 'copy'
     errorStrategy 'ignore'
 
     input:

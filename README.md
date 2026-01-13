@@ -17,7 +17,13 @@ You will need to install:
 
 ### downloading databases
 
-Depending on the tools you are gonna use you might need to download databases. You can run the Download_DB.sh script to download the databases for CheckM, CheckM2 and Plassembler. Download_skani.sh can be used to download the pre-sketched skani GTDB-TK database. Other databases (BUSCO, BAKTA, Kraken) need to be downloaded manually with the appropriate tool. Precompiled kraken datbases can be found here: https://benlangmead.github.io/aws-indexes/k2, I tend to use standard or PlusPF. 
+Depending on the tools you are gonna use you might need to download databases. You can run the Download_DB.sh script to download the databases for CheckM, CheckM2 and Plassembler. Download_skani.sh can be used to download the pre-sketched skani GTDB-TK database. Other databases (BUSCO, BAKTA, Kraken) need to be downloaded manually with the appropriate tool. 
+
+For BAKTA, I recommend the full database for the most complete and least hypothtical proteins. The light database can be used when storage or runtimes are an issue.
+
+For Busco, the auto-lineage function currently does not work. So I recommend using an appropriate database of choice. When working with unknown isolates I suggest the bacteria_odb12 or to skip busco completely.
+
+Precompiled kraken datbases can be found here: https://benlangmead.github.io/aws-indexes/k2, I tend to use standard or PlusPF. 
 
 ### Running LONGpia
 
