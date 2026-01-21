@@ -31,6 +31,18 @@ The main nextflow script need to be run on a server or node with internet so tha
 
 If you are using a (slurm) HPC you will also need to set up a configuration or profile for you system, it is best to consult your server administrator for this. Also make sure to set the resources.config to appropriate values.
 
+To run longpia make sure to check all setting in nextflow.config and fill in the sample sheet. Then run the script with the following command:
+
+nextflow main.nf -profile yourprofile 
+
+For example on our picasso HPC:
+
+nextflow main.nf -profile picasso 
+
+To resume a run
+
+nextflow main.nf -profile yourprofile -resume
+
 ## Pipeline overview and steps
 
 ### Reads QC and filtering
@@ -116,3 +128,4 @@ I recommend running all QC tools as they run in parrallel and take little time. 
 - Currently nextflow reports cannot be generated as some containers are missing essential tools.
 - Medaka seems to run slower then other pipelines. I suspect it is because we use a much more recent version with more recent models.
 - Longpia will finish all assembly jobs before continueing.
+- I found Autocycler struggles with large complext genomes like streptomyces unless sequenced deeply and with long reads.

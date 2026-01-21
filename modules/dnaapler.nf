@@ -18,6 +18,6 @@ process DNAAPLER {
         -o dnaapler_output \
         -t $task.cpus \
         --prefix ${sampleID} \
-        -a nearest
+        -a none
     """
 }
