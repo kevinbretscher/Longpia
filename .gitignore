@@ -16,3 +16,6 @@
 Autocycler_plassembler.tar
 Autocycler_plassembler_gnu.tar.gz
 Inspector+Dockerfile.txt
+/Inspector
+Inspector_report.html
+combined_summary_statistics.tsv

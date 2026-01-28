@@ -111,7 +111,7 @@ workflow {
 
     samples = (1..params.n_samples).collect { num -> String.format('%02d', num)}
 
-    println samples
+    // println samples
 
     assembly_jobs = channel
         .from(assemblers)
