@@ -16,5 +16,9 @@ process CRAQ {
     -sms $raw_reads \
     -t $task.cpus \
     -D ${sampleID}
+
+    rm -r ${sampleID}/*fastq.gz
+    rm -r ${sampleID}/*fasta
+    rm -r ${sampleID}/seq.size
     """
 }
