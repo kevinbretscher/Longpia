@@ -129,3 +129,4 @@ I recommend running all QC tools as they run in parrallel and take little time. 
 - Medaka seems to run slower then other pipelines. I suspect it is because we use a much more recent version with more recent models.
 - Longpia will finish all assembly jobs before continueing.
 - I found Autocycler struggles with large complext genomes like streptomyces unless sequenced deeply and with long reads.
+- If file quotas are an issue on your HPC, skip Busco as it generates many small files.
