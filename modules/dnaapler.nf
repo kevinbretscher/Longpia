@@ -19,5 +19,7 @@ process DNAAPLER {
         -t $task.cpus \
         --prefix ${sampleID} \
         -a none
+    
+    sleep 100
     """
 }

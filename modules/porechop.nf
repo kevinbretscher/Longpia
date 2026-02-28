@@ -17,5 +17,7 @@ process PORECHOP {
         -t $task.cpus \
         -o ${sampleID}_porechop.fastq.gz \
         > ${sampleID}_porechop.log
+    
+    sleep 100
     """
 }
