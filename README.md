@@ -19,17 +19,19 @@ You will need to install:
 
 Depending on the tools you are gonna use you might need to download databases. You can run the Download_DB.sh script to download the databases for CheckM, CheckM2 and Plassembler. Download_skani.sh can be used to download the pre-sketched skani GTDB-TK database. Other databases (BUSCO, BAKTA, Kraken) need to be downloaded manually with the appropriate tool. 
 
-For BAKTA, I recommend the full database for the most complete and least hypothtical proteins. The light database can be used when storage or runtimes are an issue.
+For BAKTA, I recommend the full database for the most complete and least hypothtical proteins. The light database can be used when storage or runtimes are an issue. Make sure the BAKTA database matches that of the Docker. 
 
 For Busco, the auto-lineage function currently does not work. So I recommend using an appropriate database of choice. When working with unknown isolates I suggest the bacteria_odb12 or to skip busco completely.
 
-Precompiled kraken datbases can be found here: https://benlangmead.github.io/aws-indexes/k2, I tend to use standard or PlusPF. 
+Precompiled kraken databases can be found here: https://benlangmead.github.io/aws-indexes/k2, I tend to use standard or PlusPF. 
 
 ### Running LONGpia
 
 The main nextflow script need to be run on a server or node with internet so that containers can be pulled. The individual processes/jobs do not require internet.
 
 If you are using a (slurm) HPC you will also need to set up a configuration or profile for you system, it is best to consult your server administrator for this. Also make sure to set the resources.config to appropriate values.
+
+For a HPC, I would recommend to run the pipeline in a tmux session in the login node. The individual jobs will be send nodes. Make sure Nextflow and Singularity are avaialble or loaded for the pipeline to run. 
 
 To run longpia make sure to check all setting in nextflow.config and fill in the sample sheet. Then run the script with the following command:
 
