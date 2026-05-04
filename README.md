@@ -122,6 +122,26 @@ If you are not sure if your read length and coverage is enough to assemble unfra
 
 I recommend running all QC tools as they run in parrallel and take little time. However BUSCO might be problematic when working with unknown isolates (see below).
 
+## Common errors and how to solve them.
+
+### Assembly
+
+Flye might give an error like this:
+
+  [2026-03-10 21:16:27] ERROR: No disjointigs were assembled - please check if the read type and genome size parameters are correct
+  [2026-03-10 21:16:27] ERROR: Pipeline aborted
+
+This often means two things, (1) there is too many reads, confusing flye or (2) Reads are severely contaminated with an often similar strain. 
+
+In the case of 1:
+- Set flye parameters to "--asm-coverage 50x --genome-size 5m". Change genome size to the estimated size. Please note that this will be applied to all samples. I aim to automate this in the future.
+- Subsample the dataset with filtlong: "--target_bases 500mb". This will only keep the 500mb best reads. You can increase this further if nessecary.  
+
+In case of 2:
+- Set flye parameters to "--meta" and asses the results carefully.
+
+
+
 ## Known issues
 
 - Plassembler only assembles plasmids, which means that if your bacteria does not have a plasmid it fails. When resuming the pipeline it will attempt again to assemble with plassembler and therefore also rerun avery step after it. I'm working on a way to prevent this but for now it is best to not use plassembler when asssembling genomes without plasmid. 

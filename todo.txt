@@ -1,3 +1,5 @@
+
+Rename contigs after reorienting
 crate emtpy fasta when plassembler fails
 add filtering and reads qc,, nanofilt fastplong
 filter common contaminants?

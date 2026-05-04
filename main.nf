@@ -37,6 +37,28 @@ include { SKANI_CLASSIFICATION } from './modules/skani.nf'
 
 workflow {
 
+
+    log.info """
+    =====================================================
+    LongPIA V 0.2 - Long read assembly pipeline with autocycler
+    =====================================================
+    
+        - Developed by Kevin Bretscher (@kevinbretscher.bsky.social)
+        - https://github.com/kevinbretscher/Nextflow_autocycler
+        - If encountering any issues please check the github issues and FAQ first before opening an issue on the github repository
+        - Please make sure to citate all tools used in the pipeline if you use it for your research. See tool documentation for citation information.
+
+    =====================================================
+
+    Tips:
+      - Resume runs with: nextflow run main.nf -profile XXXX -resume
+      - Make sure Singularity, apptainer or Docker is installed for containerized execution
+      - Shallow, linear or incomplete genomes cannot be assembled with autoycler, in these cases we recommend using the flye assembler only option. See FAQ.
+
+    =====================================================
+    """
+
+
     ch_input = channel
     .fromPath('./test/samplesheet.tsv')
     .splitCsv(sep: '\t', header:true)
