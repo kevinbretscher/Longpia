@@ -44,7 +44,7 @@ workflow {
     =====================================================
     
         - Developed by Kevin Bretscher (@kevinbretscher.bsky.social)
-        - https://github.com/kevinbretscher/Nextflow_autocycler
+        - https://github.com/kevinbretscher/Longpia
         - If encountering any issues please check the github issues and FAQ first before opening an issue on the github repository
         - Please make sure to citate all tools used in the pipeline if you use it for your research. See tool documentation for citation information.
 
@@ -60,7 +60,7 @@ workflow {
 
 
     ch_input = channel
-    .fromPath('./test/samplesheet.tsv')
+    .fromPath(params.samplesheet)
     .splitCsv(sep: '\t', header:true)
 
     //ch_input.view()
@@ -270,7 +270,8 @@ workflow {
     .fromPath(params.bakta_DB)
     .set { BAKTA_db }
 
-    bakta_ch = BAKTA(reoriented_genomes_ch.genomes_keyed,BAKTA_db)
+    bakta_out = BAKTA(reoriented_genomes_ch.genomes_keyed, BAKTA_db)
+    bakta_ch = bakta_out.bakta_summary   // ← unwrap the named output here
 
     }
 
@@ -302,7 +303,7 @@ workflow {
         checkm2_ch.ifEmpty([]),
         BUSCO_ch.ifEmpty([]),
         QUAST_ch.ifEmpty([]),
-        bakta_ch.bakta_summary.collect().ifEmpty([]),
+        bakta_ch.collect().ifEmpty([]),
         kraken2_ch.collect().ifEmpty([])
     )
 
