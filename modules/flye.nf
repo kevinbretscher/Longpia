@@ -12,13 +12,15 @@ process FLYE {
     tuple val(sampleID), path("$sampleID/assembly.fasta"), emit: genomes_keyed
 
     script:
+    def extra_args = task.attempt == 3 ? "--meta" : ""
     """
     mkdir -p $sampleID
     flye \
         --nano-hq $filtered_reads \
         --out-dir $sampleID \
         --threads $task.cpus \
-        ${params.flye_options}
+        ${params.flye_options} \
+        ${extra_args}
 
     sleep 300
 
