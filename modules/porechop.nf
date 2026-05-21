@@ -15,6 +15,7 @@ process PORECHOP {
     porechop \
         -i $reads \
         -t $task.cpus \
+        --no_split \
         -o ${sampleID}_porechop.fastq.gz \
         > ${sampleID}_porechop.log
     
