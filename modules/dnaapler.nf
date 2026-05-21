@@ -21,5 +21,11 @@ process DNAAPLER {
         -a none
     
     sleep 100
+
+    for fasta in dnaapler_output/*_reoriented.fasta; do
+        sed -i 's/^>/>${sampleID}_/' "\$fasta"
+    done
+
+    sleep 100
     """
 }
