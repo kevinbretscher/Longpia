@@ -1,6 +1,6 @@
 process BAKTA {
     tag "Bakta_${sampleID}"
-    container "oschwengers/bakta"
+    container "oschwengers/bakta:v1.11.3"
     publishDir "${params.outdir}/BAKTA", mode: 'copy'
     errorStrategy 'retry'
     maxRetries 5
