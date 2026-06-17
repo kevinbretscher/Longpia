@@ -1,6 +1,6 @@
 process CHECKM {
     tag "CheckM"
-    container "staphb/checkm:latest"
+    container "staphb/checkm:1.2.4"
     publishDir "${params.outdir}", mode: 'copy'
     errorStrategy 'retry'
     maxRetries 2
